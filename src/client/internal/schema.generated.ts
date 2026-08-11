@@ -284,6 +284,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v2/administration/projects/{projectId}/export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Export a project
+         * @description Exports the whole project (content, branches, tasks, screenshots, settings) as a self-contained zip that can be imported onto a project on another instance running the same Tolgee version.
+         */
+        get: operations["exportProject"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/administration/projects/{projectId}/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import a project (destructive)
+         * @description Wipes ALL in-scope content of this project and replaces it with the uploaded export zip (mirror / wipe-and-replace). The zip must come from an instance running the same Tolgee version. Users are matched by username (case-insensitive); content authored by a user not present on this instance is attributed to the importing admin. The project must be quiescent during the import — concurrent edits to it are not supported. Setting `ignoreVersion` bypasses the version check — unsupported: a cross-version import may complete yet silently corrupt the project's data.
+         */
+        post: operations["importProject"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v2/administration/users": {
         parameters: {
             query?: never;
@@ -452,7 +492,7 @@ export interface paths {
          * Create API key
          * @description Creates new API key with provided scopes
          */
-        post: operations["create_19"];
+        post: operations["create_20"];
         delete?: never;
         options?: never;
         head?: never;
@@ -525,10 +565,10 @@ export interface paths {
         };
         get?: never;
         /** Update API key */
-        put: operations["update_13"];
+        put: operations["update_14"];
         post?: never;
         /** Delete API key */
-        delete: operations["delete_12"];
+        delete: operations["delete_13"];
         options?: never;
         head?: never;
         patch?: never;
@@ -562,7 +602,7 @@ export interface paths {
          * Get one API key
          * @description Returns specific API key info
          */
-        get: operations["get_26"];
+        get: operations["get_27"];
         put?: never;
         post?: never;
         delete?: never;
@@ -603,6 +643,26 @@ export interface paths {
         post: operations["acceptChangeAuthProvider"];
         /** Reject change of the third party authentication provider */
         delete: operations["rejectChangeAuthProvider"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/binary-assets/download": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Download or inline-preview a binary asset file via short-lived ticket
+         * @description Pass inline=true (or omit when content type is audio/image/video) to stream with Content-Disposition: inline so browsers can play/preview in-page.
+         */
+        get: operations["download"];
+        put?: never;
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -747,7 +807,7 @@ export interface paths {
         put?: never;
         post?: never;
         /** Delete uploaded images */
-        delete: operations["delete_19"];
+        delete: operations["delete_21"];
         options?: never;
         head?: never;
         patch?: never;
@@ -863,7 +923,7 @@ export interface paths {
         get: operations["getAll_10"];
         put?: never;
         /** Create organization */
-        post: operations["create_14"];
+        post: operations["create_15"];
         delete?: never;
         options?: never;
         head?: never;
@@ -878,15 +938,15 @@ export interface paths {
             cookie?: never;
         };
         /** Get one organization */
-        get: operations["get_17"];
+        get: operations["get_18"];
         /** Update organization data */
-        put: operations["update_12"];
+        put: operations["update_13"];
         post?: never;
         /**
          * Delete organization
          * @description Deletes organization and all its data including projects
          */
-        delete: operations["delete_11"];
+        delete: operations["delete_12"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1021,7 +1081,7 @@ export interface paths {
         get: operations["getAll_13"];
         put?: never;
         /** Create glossary */
-        post: operations["create_17"];
+        post: operations["create_18"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1053,12 +1113,12 @@ export interface paths {
             cookie?: never;
         };
         /** Get glossary */
-        get: operations["get_15"];
+        get: operations["get_16"];
         /** Update glossary */
-        put: operations["update_10"];
+        put: operations["update_11"];
         post?: never;
         /** Delete glossary */
-        delete: operations["delete_9"];
+        delete: operations["delete_10"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1143,7 +1203,7 @@ export interface paths {
         get: operations["getAll_14"];
         put?: never;
         /** Create a new glossary term */
-        post: operations["create_18"];
+        post: operations["create_19"];
         /** Batch delete multiple terms */
         delete: operations["deleteMultiple"];
         options?: never;
@@ -1159,12 +1219,12 @@ export interface paths {
             cookie?: never;
         };
         /** Get glossary term */
-        get: operations["get_16"];
+        get: operations["get_17"];
         /** Update glossary term */
-        put: operations["update_11"];
+        put: operations["update_12"];
         post?: never;
         /** Delete glossary term */
-        delete: operations["delete_10"];
+        delete: operations["delete_11"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1180,7 +1240,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Set a new glossary term translation for language */
-        post: operations["update_14"];
+        post: operations["update_15"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1195,7 +1255,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get glossary term translation for language */
-        get: operations["get_25"];
+        get: operations["get_26"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1538,7 +1598,7 @@ export interface paths {
         get: operations["getAll_11"];
         put?: never;
         /** Create shared translation memory */
-        post: operations["create_15"];
+        post: operations["create_16"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1590,12 +1650,12 @@ export interface paths {
             cookie?: never;
         };
         /** Get translation memory */
-        get: operations["get_13"];
+        get: operations["get_14"];
         /** Update shared translation memory */
-        put: operations["update_8"];
+        put: operations["update_9"];
         post?: never;
         /** Delete shared translation memory */
-        delete: operations["delete_7"];
+        delete: operations["delete_8"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1629,10 +1689,10 @@ export interface paths {
          * List rows of a translation memory (paginated)
          * @description Pagination is row-level: each STORED bucket (manual entries on a source collapse into one row; each TMX `tuid` is its own row) and each VIRTUAL origin (one row per project key) gets its own page item. The `targetLanguageTag` filter narrows the *cells* of a row to a subset of target languages; rows themselves still appear with empty cells so the user can add a translation.
          */
-        get: operations["list_3"];
+        get: operations["list_5"];
         put?: never;
         /** Create a translation memory entry */
-        post: operations["create_16"];
+        post: operations["create_17"];
         /**
          * Batch delete translation memory entry groups
          * @description For every entry ID in the payload, deletes the entire group that shares the same source text (and key). The request is deduplicated to distinct groups so passing multiple entries from the same row is a no-op past the first one.
@@ -1691,12 +1751,12 @@ export interface paths {
             cookie?: never;
         };
         /** Get a single translation memory entry */
-        get: operations["get_14"];
+        get: operations["get_15"];
         /** Update a translation memory entry */
-        put: operations["update_9"];
+        put: operations["update_10"];
         post?: never;
         /** Delete a translation memory entry */
-        delete: operations["delete_8"];
+        delete: operations["delete_9"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1841,7 +1901,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get organization by slug */
-        get: operations["get_24"];
+        get: operations["get_25"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1901,7 +1961,7 @@ export interface paths {
         get: operations["getAll_9"];
         put?: never;
         /** Create PAK */
-        post: operations["create_13"];
+        post: operations["create_14"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1936,18 +1996,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one PAK */
-        get: operations["get_12"];
+        get: operations["get_13"];
         /**
          * Update PAK
          * @description Updates Personal Access Token
          */
-        put: operations["update_7"];
+        put: operations["update_8"];
         post?: never;
         /**
          * Delete PAK
          * @description Deletes Personal Access Token
          */
-        delete: operations["delete_6"];
+        delete: operations["delete_7"];
         options?: never;
         head?: never;
         patch?: never;
@@ -2253,7 +2313,7 @@ export interface paths {
             cookie?: never;
         };
         /** List batch operations */
-        get: operations["list_4"];
+        get: operations["list_6"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2270,7 +2330,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get batch operation */
-        get: operations["get_22"];
+        get: operations["get_23"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2313,6 +2373,300 @@ export interface paths {
          * @description Stores a bigMeta for a project
          */
         post: operations["store_2"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-asset-voices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List default voices — the project default plus any per-language overrides */
+        get: operations["list"];
+        /** Set or clear the default voice for the project or one language */
+        put: operations["set"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List binary assets */
+        get: operations["list_4"];
+        put?: never;
+        /** Create binary asset with source file */
+        post: operations["create_13"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get binary asset detail */
+        get: operations["get_12"];
+        /** Update binary asset metadata */
+        put: operations["update_7"];
+        post?: never;
+        /** Delete binary asset */
+        delete: operations["delete_6"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/source": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Replace binary asset source file */
+        put: operations["replaceSource"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/source/download-ticket": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Issue short-lived download ticket for source file */
+        post: operations["sourceDownloadTicket"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/transcript": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add a transcript to a binary asset
+         * @description Creates a key owned by this asset (optionally seeded with text), or links an existing key. Transcript text itself is edited through the normal key/translation endpoints.
+         */
+        post: operations["addTranscript"];
+        /**
+         * Remove a binary asset's transcript
+         * @description An owned key is deleted with it; a linked key is left in place. Returns the updated asset so callers do not need to re-fetch.
+         */
+        delete: operations["deleteTranscript"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/transcript/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate a transcript from the asset's audio
+         * @description Sends the source file to the configured speech-to-text provider and writes the result into the asset's transcript key, creating that key if it does not exist. Overwrites existing source-language text. Audio and video only.
+         */
+        post: operations["generateTranscript"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/transcript/generate/{languageId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate one language's transcript from its localized audio
+         * @description Transcribes the localized file for this language — not a translation of the source transcript — so the text matches what that language's voice actually says.
+         */
+        post: operations["generateTranslationTranscript"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Upload or replace localized binary asset file */
+        put: operations["upsertTranslation"];
+        post?: never;
+        /** Delete localized binary asset file */
+        delete: operations["deleteTranslation"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/download-ticket": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Issue short-lived download ticket for localized file */
+        post: operations["translationDownloadTicket"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/reviewed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Confirm or un-confirm the final file for a language
+         * @description Confirmation is cleared automatically whenever what 'final' points at changes — a new upload, a different chosen version, or a replaced source.
+         */
+        put: operations["setTranslationReviewed"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/versions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List pipeline versions for a translation */
+        get: operations["listBinaryAssetTranslationVersions"];
+        put?: never;
+        /** Upload a manual version for a translation */
+        post: operations["uploadVersion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/versions/chosen-version": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set the chosen (reviewed final) version, or null for OG */
+        put: operations["setChosen"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/versions/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run a tool on the OG or a version, producing a new version */
+        post: operations["runTool"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/versions/{versionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete a pipeline version */
+        delete: operations["delete_20"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/binary-assets/{assetId}/translations/{languageId}/versions/{versionId}/download-ticket": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Issue short-lived download ticket for a version file */
+        post: operations["downloadTicket"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2553,7 +2907,7 @@ export interface paths {
         /** Rename branch */
         post: operations["rename"];
         /** Delete branch */
-        delete: operations["delete_15"];
+        delete: operations["delete_16"];
         options?: never;
         head?: never;
         patch?: never;
@@ -2584,7 +2938,7 @@ export interface paths {
             cookie?: never;
         };
         /** List existing Content Delivery Configs */
-        get: operations["list_2"];
+        get: operations["list_3"];
         put?: never;
         /** Create Content Delivery Config */
         post: operations["create_10"];
@@ -2625,7 +2979,7 @@ export interface paths {
             cookie?: never;
         };
         /** List Content Storages */
-        get: operations["list_1"];
+        get: operations["list_2"];
         put?: never;
         /** Create Content Storage */
         post: operations["create_9"];
@@ -2685,6 +3039,26 @@ export interface paths {
          * @description Tests existing Content Storage with new configuration. (Uses existing secrets, if nulls provided)
          */
         post: operations["testExisting"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/contributors": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get project contributors
+         * @description Returns users who have activity on the project but are not currently its members. Deleted and disabled users are excluded. Sortable by lastContributionAt and firstContributionAt only; any other sort property falls back to lastContributionAt descending.
+         */
+        get: operations["getContributors"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -3191,7 +3565,7 @@ export interface paths {
          * Delete one or multiple keys (post)
          * @description Delete one or multiple keys by their IDs in request body. Useful for larger requests esxceeding allowed URL length.
          */
-        delete: operations["delete_13"];
+        delete: operations["delete_14"];
         options?: never;
         head?: never;
         patch?: never;
@@ -3328,7 +3702,7 @@ export interface paths {
             cookie?: never;
         };
         /** List trashed keys */
-        get: operations["list_8"];
+        get: operations["list_10"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3416,7 +3790,7 @@ export interface paths {
         put?: never;
         post?: never;
         /** Delete one or multiple keys */
-        delete: operations["delete_17"];
+        delete: operations["delete_18"];
         options?: never;
         head?: never;
         patch?: never;
@@ -3752,10 +4126,7 @@ export interface paths {
         get?: never;
         put?: never;
         post?: never;
-        /**
-         * Delete suggestion
-         * @description User can only delete suggestion created by them
-         */
+        /** Delete suggestion */
         delete: operations["deleteSuggestion"];
         options?: never;
         head?: never;
@@ -4080,6 +4451,26 @@ export interface paths {
         post?: never;
         /** Delete prompt */
         delete: operations["deletePrompt"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/projects/{projectId}/publishing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Set project publishing state
+         * @description Marks the project as public or private. Only the organization owner or a server admin can change this.
+         */
+        put: operations["setProjectPublic"];
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -4963,7 +5354,7 @@ export interface paths {
          * List all translation memory assignments for the project
          * @description Always readable. When the TRANSLATION_MEMORY feature is not enabled for the organization, only the project-type assignment (if any) is returned so the settings page can still show the row that already drives in-project suggestions.
          */
-        get: operations["list_6"];
+        get: operations["list_8"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5459,7 +5850,7 @@ export interface paths {
             cookie?: never;
         };
         /** List webhook configurations */
-        get: operations["list"];
+        get: operations["list_1"];
         put?: never;
         /** Create new webhook configuration */
         post: operations["create"];
@@ -5550,7 +5941,7 @@ export interface paths {
             cookie?: never;
         };
         /** @description Return server configuration properties documentation */
-        get: operations["get_21"];
+        get: operations["get_22"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5566,7 +5957,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get: operations["get_20"];
+        get: operations["get_21"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5586,7 +5977,7 @@ export interface paths {
          * Get initial data
          * @description Returns initial data required by the UI to load
          */
-        get: operations["get_19"];
+        get: operations["get_20"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5607,6 +5998,26 @@ export interface paths {
          * @description Get machine translation providers
          */
         get: operations["getInfo_4"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/public/projects/with-stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get all public projects with stats
+         * @description Returns all public projects (including statistics), discoverable by anyone — no authentication required
+         */
+        get: operations["getAllPublicWithStatistics"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5916,7 +6327,7 @@ export interface paths {
             cookie?: never;
         };
         /** Get user's preferences */
-        get: operations["get_18"];
+        get: operations["get_19"];
         put?: never;
         post?: never;
         delete?: never;
@@ -6255,7 +6666,7 @@ export interface components {
              *       "TRANSLATIONS_VIEW"
              *     ]
              */
-            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify")[];
+            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "translation-suggestions.manage" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify" | "organization-quotas.view")[];
             /**
              * @description List of languages user can change state to. If null, changing state of all language values is permitted.
              * @example [
@@ -6272,6 +6683,14 @@ export interface components {
              *     ]
              */
             suggestLanguageIds?: number[];
+            /**
+             * @description List of languages user can manage suggestions for. If null, managing suggestions for all languages is permitted.
+             * @example [
+             *       200001,
+             *       200004
+             *     ]
+             */
+            suggestManageLanguageIds?: number[];
             /**
              * @description List of languages user can translate to. If null, all languages editing is permitted.
              * @example [
@@ -6439,6 +6858,114 @@ export interface components {
         BigMetaDto: {
             /** @description Keys in the document used as a context for machine translation. Keys in the same order as they appear in the document. The order is important! We are using it for graph distance calculation.  */
             relatedKeysInOrder?: components["schemas"]["RelatedKeyDto"][];
+        };
+        BinaryAssetDownloadTicketModel: {
+            url: string;
+        };
+        BinaryAssetModel: {
+            /** Format: int64 */
+            byteSize: number;
+            contentType: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: int32 */
+            currentCount: number;
+            description?: string;
+            /** Format: int64 */
+            id: number;
+            name: string;
+            originalFilename: string;
+            /** Format: int32 */
+            outdatedCount: number;
+            sha256: string;
+            /** Format: int64 */
+            sourceLanguageId: number;
+            sourceLanguageTag: string;
+            /** Format: int64 */
+            sourceRevision: number;
+            /** Format: int32 */
+            targetLanguageCount: number;
+            transcriptKeyDeleted: boolean;
+            /** Format: int64 */
+            transcriptKeyId?: number;
+            transcriptKeyName?: string;
+            transcriptKeyOwned: boolean;
+            transcriptSourceText?: string;
+            transcriptionAvailable: boolean;
+            translations?: components["schemas"]["BinaryAssetTranslationModel"][];
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: int64 */
+            uploadedById?: number;
+        };
+        BinaryAssetReviewRequest: {
+            reviewed: boolean;
+        };
+        BinaryAssetTranscriptRequest: {
+            /**
+             * Format: int64
+             * @description Id of an existing key in this project to use as the transcript. The key is not deleted when the asset is. Mutually exclusive with text.
+             */
+            keyId?: number;
+            /** @description Language tag the initial text is in. Defaults to the asset's source language. Only meaningful together with text; must be a language of this project. */
+            languageTag?: string;
+            /** @description Initial transcript text, in the asset's source language unless languageTag says otherwise. Creates a new key owned by this asset. Mutually exclusive with keyId. */
+            text?: string;
+        };
+        BinaryAssetTranslationModel: {
+            /** Format: int64 */
+            byteSize?: number;
+            chosenVersionFilename?: string;
+            /** Format: int64 */
+            chosenVersionId?: number;
+            chosenVersionTool?: string;
+            contentType?: string;
+            /** Format: int64 */
+            languageId: number;
+            languageName: string;
+            languageTag: string;
+            originalFilename?: string;
+            reviewed: boolean;
+            sha256?: string;
+            /** Format: int64 */
+            sourceRevision?: number;
+            /** @enum {string} */
+            status: "MISSING" | "CURRENT" | "OUTDATED";
+            transcriptState?: string;
+            transcriptText?: string;
+            transcriptionAvailable: boolean;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: int64 */
+            uploadedById?: number;
+            /** Format: int32 */
+            versionCount: number;
+        };
+        BinaryAssetTranslationVersionModel: {
+            /** Format: int64 */
+            byteSize: number;
+            chosen: boolean;
+            contentType: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: int64 */
+            createdById?: number;
+            /** Format: int64 */
+            id: number;
+            originalFilename: string;
+            sha256: string;
+            tool: string;
+            toolParams?: string;
+        };
+        BinaryAssetUpdateRequest: {
+            description?: string;
+            name: string;
+        };
+        BinaryAssetVoiceModel: {
+            /** Format: int64 */
+            languageId?: number;
+            languageTag?: string;
+            voiceId: string;
         };
         BranchMergeChangeModel: {
             /** @description Languages changed by the merge */
@@ -6887,7 +7414,7 @@ export interface components {
         };
         ComputedPermissionModel: {
             /** @enum {string} */
-            origin: "ORGANIZATION_BASE" | "DIRECT" | "ORGANIZATION_OWNER" | "NONE" | "SERVER_ADMIN" | "SERVER_SUPPORTER";
+            origin: "ORGANIZATION_BASE" | "DIRECT" | "ORGANIZATION_OWNER" | "NONE" | "SERVER_ADMIN" | "SERVER_SUPPORTER" | "COMMUNITY";
             permissionModel?: components["schemas"]["PermissionModel"];
             /**
              * @deprecated
@@ -6907,7 +7434,7 @@ export interface components {
              *       "TRANSLATIONS_VIEW"
              *     ]
              */
-            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify")[];
+            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "translation-suggestions.manage" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify" | "organization-quotas.view")[];
             /**
              * @description List of languages user can change state to. If null, changing state of all language values is permitted.
              * @example [
@@ -6924,6 +7451,14 @@ export interface components {
              *     ]
              */
             suggestLanguageIds?: number[];
+            /**
+             * @description List of languages user can manage suggestions for. If null, managing suggestions for all languages is permitted.
+             * @example [
+             *       200001,
+             *       200004
+             *     ]
+             */
+            suggestManageLanguageIds?: number[];
             /**
              * @description List of languages user can translate to. If null, all languages editing is permitted.
              * @example [
@@ -7149,6 +7684,18 @@ export interface components {
             name: string;
             publicUrlPrefix?: string;
             s3ContentStorageConfig?: components["schemas"]["S3ContentStorageConfigDto"];
+        };
+        ContributorModel: {
+            avatar?: components["schemas"]["Avatar"];
+            /** Format: date-time */
+            firstContributionAt: string;
+            /** Format: int64 */
+            id: number;
+            invitationPending: boolean;
+            /** Format: date-time */
+            lastContributionAt: string;
+            name?: string;
+            username: string;
         };
         CopyTranslationRequest: {
             keyIds: number[];
@@ -7464,7 +8011,7 @@ export interface components {
         };
         ErrorResponseTyped: {
             /** @enum {string} */
-            code: "unauthenticated" | "api_access_forbidden" | "api_key_not_found" | "invalid_api_key" | "invalid_project_api_key" | "project_api_key_expired" | "bad_credentials" | "mfa_enabled" | "invalid_otp_code" | "mfa_not_enabled" | "can_not_revoke_own_permissions" | "data_corrupted" | "invitation_code_does_not_exist_or_expired" | "invitation_email_mismatch" | "language_tag_exists" | "language_name_exists" | "language_not_found" | "operation_not_permitted" | "registrations_not_allowed" | "project_not_found" | "resource_not_found" | "scope_not_found" | "key_exists" | "third_party_auth_error_message" | "third_party_auth_no_email" | "third_party_auth_non_matching_email" | "third_party_auth_no_sub" | "third_party_auth_unknown_error" | "email_already_verified" | "third_party_unauthorized" | "third_party_google_workspace_mismatch" | "third_party_switch_initiated" | "third_party_switch_conflict" | "username_already_exists" | "email_domain_not_allowed" | "username_or_password_invalid" | "user_already_has_permissions" | "user_already_has_role" | "user_not_found" | "file_not_image" | "file_too_big" | "invalid_timestamp" | "email_not_verified" | "missing_callback_url" | "invalid_jwt_token" | "expired_jwt_token" | "general_jwt_error" | "cannot_find_suitable_address_part" | "slug_not_unique" | "user_is_not_member_of_organization" | "organization_has_no_other_owner" | "user_has_no_project_access" | "user_is_organization_owner" | "cannot_set_your_own_permissions" | "user_is_organization_member" | "property_not_mutable" | "import_language_not_from_project" | "existing_language_not_selected" | "conflict_is_not_resolved" | "language_already_selected" | "cannot_parse_file" | "could_not_resolve_property" | "cannot_add_more_then_100_languages" | "no_languages_provided" | "language_with_base_language_tag_not_found" | "language_not_from_project" | "namespace_not_from_project" | "cannot_delete_base_language" | "key_not_from_project" | "max_screenshots_exceeded" | "translation_not_from_project" | "can_edit_only_own_comment" | "request_parse_error" | "request_validation_error" | "filter_by_value_state_not_valid" | "filter_by_value_qa_check_type_not_valid" | "import_has_expired" | "tag_not_from_project" | "translation_text_too_long" | "invalid_recaptcha_token" | "cannot_leave_owning_project" | "cannot_leave_project_with_organization_role" | "dont_have_direct_permissions" | "tag_too_log" | "too_many_uploaded_images" | "one_or_more_images_not_found" | "screenshot_not_of_key" | "service_not_found" | "too_many_requests" | "translation_not_found" | "out_of_credits" | "key_not_found" | "organization_not_found" | "cannot_find_base_language" | "base_language_not_found" | "no_exported_result" | "cannot_set_your_own_role" | "only_translate_review_or_view_permission_accepts_view_languages" | "oauth2_token_url_not_set" | "oauth2_user_url_not_set" | "email_already_invited_or_member" | "price_not_found" | "invoice_not_from_organization" | "invoice_not_found" | "plan_not_found" | "plan_not_available_any_more" | "no_auto_translation_method" | "cannot_translate_base_language" | "pat_not_found" | "invalid_pat" | "pat_expired" | "operation_unavailable_for_account_type" | "validation_email_is_not_valid" | "current_password_required" | "cannot_create_organization" | "wrong_current_password" | "wrong_param_type" | "user_missing_password" | "expired_super_jwt_token" | "cannot_delete_your_own_account" | "cannot_sort_by_this_column" | "namespace_not_found" | "namespace_exists" | "invalid_authentication_method" | "unknown_sort_property" | "only_review_permission_accepts_state_change_languages" | "only_translate_or_review_permission_accepts_translate_languages" | "cannot_set_language_permissions_for_admin_scope" | "cannot_set_view_languages_without_translations_view_scope" | "cannot_set_translate_languages_without_translations_edit_scope" | "cannot_set_state_change_languages_without_translations_state_edit_scope" | "language_not_permitted" | "scopes_has_to_be_set" | "set_exactly_one_of_scopes_or_type" | "translation_exists" | "import_keys_error" | "provide_only_one_of_screenshots_and_screenshot_uploaded_image_ids" | "multiple_projects_not_supported" | "plan_translation_limit_exceeded" | "feature_not_enabled" | "license_key_not_found" | "cannot_set_view_languages_without_for_level_based_permissions" | "cannot_set_different_translate_and_state_change_languages_for_level_based_permissions" | "cannot_disable_your_own_account" | "user_account_disabled" | "subscription_not_found" | "invoice_does_not_have_usage" | "customer_not_found" | "subscription_not_active" | "organization_already_subscribed" | "organization_not_subscribed" | "license_key_used_by_another_instance" | "translation_spending_limit_exceeded" | "credit_spending_limit_exceeded" | "seats_spending_limit_exceeded" | "this_instance_is_already_licensed" | "big_meta_not_from_project" | "mt_service_not_enabled" | "project_not_selected" | "organization_not_selected" | "plan_has_subscribers" | "translation_failed" | "batch_job_not_found" | "no_translations_to_recheck" | "key_exists_in_namespace" | "tag_is_blank" | "execution_failed_on_management_error" | "translation_api_rate_limit" | "cannot_finalize_activity" | "formality_not_supported_by_service" | "language_not_supported_by_service" | "rate_limited" | "pat_access_not_allowed" | "pak_access_not_allowed" | "cannot_modify_disabled_translation" | "azure_config_required" | "s3_config_required" | "content_storage_config_required" | "content_storage_test_failed" | "content_storage_config_invalid" | "invalid_connection_string" | "cannot_create_azure_storage_client" | "s3_access_key_required" | "azure_connection_string_required" | "s3_secret_key_required" | "cannot_store_file_to_content_storage" | "unexpected_error_while_publishing_to_content_storage" | "webhook_responded_with_non_200_status" | "unexpected_error_while_executing_webhook" | "content_storage_is_in_use" | "cannot_set_state_for_missing_translation" | "no_project_id_provided" | "license_key_not_provided" | "subscription_already_canceled" | "user_is_subscribed_to_paid_plan" | "cannot_create_free_plan_without_fixed_type" | "cannot_modify_plan_free_status" | "key_id_not_provided" | "free_self_hosted_seat_limit_exceeded" | "advanced_params_not_supported" | "plural_forms_not_found_for_language" | "nested_plurals_not_supported" | "message_is_not_plural" | "content_outside_plural_forms" | "invalid_plural_form" | "multiple_plurals_not_supported" | "custom_values_json_too_long" | "unsupported_po_message_format" | "plural_forms_data_loss" | "current_user_does_not_own_image" | "user_cannot_view_this_organization" | "user_is_not_owner_of_organization" | "user_is_not_owner_or_maintainer_of_organization" | "pak_created_for_different_project" | "custom_slug_is_only_applicable_for_custom_storage" | "invalid_slug_format" | "batch_job_cancellation_timeout" | "import_failed" | "cannot_add_more_then_1000_languages" | "no_data_to_import" | "multiple_namespaces_mapped_to_single_file" | "multiple_mappings_for_same_file_language_name" | "multiple_mappings_for_null_file_language_name" | "too_many_mappings_for_file" | "missing_placeholder_in_template" | "tag_not_found" | "cannot_parse_encrypted_slack_login_data" | "slack_workspace_not_found" | "cannot_fetch_user_details_from_slack" | "slack_missing_scope" | "slack_not_connected_to_your_account" | "slack_invalid_command" | "slack_not_subscribed_yet" | "slack_connection_failed" | "tolgee_account_already_connected" | "slack_not_configured" | "slack_workspace_already_connected" | "slack_connection_error" | "email_verification_code_not_valid" | "cannot_subscribe_to_free_plan" | "plan_auto_assignment_only_for_free_plans" | "plan_auto_assignment_only_for_private_plans" | "task_not_found" | "task_not_finished" | "task_not_open" | "translation_agency_not_found" | "this_feature_is_not_implemented_in_oss" | "sso_token_exchange_failed" | "sso_user_info_retrieval_failed" | "sso_id_token_expired" | "sso_user_cannot_create_organization" | "sso_cant_verify_user" | "sso_auth_missing_domain" | "sso_domain_not_found_or_disabled" | "authentication_method_disabled" | "native_authentication_disabled" | "invitation_organization_mismatch" | "user_is_managed_by_organization" | "cannot_set_sso_provider_missing_fields" | "namespaces_cannot_be_disabled_when_namespace_exists" | "namespace_cannot_be_used_when_feature_is_disabled" | "sso_domain_not_allowed" | "sso_login_forced_for_this_account" | "use_sso_for_authentication_instead" | "date_has_to_be_in_the_future" | "custom_plan_and_plan_id_cannot_be_set_together" | "specify_plan_id_or_custom_plan" | "custom_plans_has_to_be_private" | "cannot_create_free_plan_with_prices" | "subscription_not_scheduled_for_cancellation" | "cannot_cancel_trial" | "cannot_update_without_modification" | "current_subscription_is_not_trialing" | "sorting_and_paging_is_not_supported_when_using_cursor" | "strings_metric_are_not_supported" | "plan_key_limit_exceeded" | "keys_spending_limit_exceeded" | "plan_seat_limit_exceeded" | "instance_not_using_license_key" | "invalid_path" | "llm_provider_not_found" | "llm_provider_error" | "prompt_not_found" | "llm_provider_not_returned_json" | "llm_template_parsing_error" | "llm_rate_limited" | "llm_provider_timeout" | "no_llm_provider_configured" | "glossary_not_found" | "glossary_term_not_found" | "glossary_term_translation_not_found" | "glossary_non_translatable_term_cannot_be_translated" | "translation_memory_name_already_exists" | "translation_memory_not_found" | "translation_memory_project_assignment_not_found" | "cannot_unassign_project_from_own_translation_memory" | "cannot_modify_project_translation_memory" | "translation_memory_already_assigned_to_project" | "translation_memory_duplicate_project_assignment" | "translation_memory_base_language_mismatch" | "cannot_change_tm_base_language_while_assigned" | "cannot_change_project_base_language_tm_conflict" | "project_translation_memory_not_found" | "translation_memory_entry_not_found" | "translation_memory_entry_read_only" | "translation_memory_entry_duplicate_target_language" | "translation_memory_import_empty" | "llm_content_filter" | "llm_provider_empty_response" | "label_not_found" | "label_not_from_project" | "label_already_exists" | "filter_by_value_label_not_valid" | "suggestion_not_found" | "user_can_only_delete_his_suggestions" | "cannot_modify_reviewed_translation" | "cannot_modify_keys" | "expect_no_conflict_failed" | "suggestion_cant_be_plural" | "suggestion_must_be_plural" | "duplicate_suggestion" | "unsupported_media_type" | "impersonation_of_admin_by_supporter_not_allowed" | "already_impersonating_user" | "operation_not_permitted_in_read_only_mode" | "file_processing_failed" | "multiple_items_in_chunk_failed" | "content_delivery_prune_failed" | "branch_not_found" | "cannot_delete_default_branch" | "cannot_delete_branch_with_children" | "branch_already_exists" | "origin_branch_not_found" | "branch_merge_not_found" | "branch_merge_change_not_found" | "branch_merge_revision_not_valid" | "branch_merge_conflicts_not_resolved" | "branch_merge_already_merged" | "feature_not_enabled_for_project" | "export_key_plural_suffix_collision" | "translation_exceeds_char_limit" | "url_not_valid" | "qa_checks_not_enabled" | "plan_migration_not_found" | "plan_has_migrations" | "source_and_target_plan_must_be_different";
+            code: "unauthenticated" | "api_access_forbidden" | "api_key_not_found" | "invalid_api_key" | "invalid_project_api_key" | "project_api_key_expired" | "bad_credentials" | "mfa_enabled" | "invalid_otp_code" | "mfa_not_enabled" | "can_not_revoke_own_permissions" | "data_corrupted" | "invitation_code_does_not_exist_or_expired" | "invitation_email_mismatch" | "language_tag_exists" | "language_name_exists" | "language_not_found" | "operation_not_permitted" | "registrations_not_allowed" | "project_not_found" | "resource_not_found" | "scope_not_found" | "key_exists" | "third_party_auth_error_message" | "third_party_auth_no_email" | "third_party_auth_non_matching_email" | "third_party_auth_no_sub" | "third_party_auth_unknown_error" | "email_already_verified" | "third_party_unauthorized" | "third_party_google_workspace_mismatch" | "third_party_switch_initiated" | "third_party_switch_conflict" | "username_already_exists" | "email_domain_not_allowed" | "username_or_password_invalid" | "user_already_has_permissions" | "user_already_has_role" | "user_not_found" | "file_not_image" | "file_too_big" | "invalid_timestamp" | "email_not_verified" | "missing_callback_url" | "invalid_jwt_token" | "expired_jwt_token" | "general_jwt_error" | "cannot_find_suitable_address_part" | "slug_not_unique" | "user_is_not_member_of_organization" | "organization_has_no_other_owner" | "user_has_no_project_access" | "user_is_organization_owner" | "cannot_set_your_own_permissions" | "user_is_organization_member" | "property_not_mutable" | "import_language_not_from_project" | "existing_language_not_selected" | "conflict_is_not_resolved" | "language_already_selected" | "cannot_parse_file" | "could_not_resolve_property" | "cannot_add_more_then_100_languages" | "no_languages_provided" | "language_with_base_language_tag_not_found" | "language_not_from_project" | "namespace_not_from_project" | "cannot_delete_base_language" | "key_not_from_project" | "max_screenshots_exceeded" | "translation_not_from_project" | "can_edit_only_own_comment" | "request_parse_error" | "request_validation_error" | "filter_by_value_state_not_valid" | "filter_by_value_qa_check_type_not_valid" | "filter_pattern_not_valid" | "filter_pattern_language_not_valid" | "import_has_expired" | "tag_not_from_project" | "translation_text_too_long" | "invalid_recaptcha_token" | "cannot_leave_owning_project" | "cannot_leave_project_with_organization_role" | "dont_have_direct_permissions" | "tag_too_log" | "too_many_uploaded_images" | "one_or_more_images_not_found" | "screenshot_not_of_key" | "service_not_found" | "too_many_requests" | "translation_not_found" | "out_of_credits" | "key_not_found" | "organization_not_found" | "cannot_find_base_language" | "base_language_not_found" | "no_exported_result" | "cannot_set_your_own_role" | "only_translate_review_or_view_permission_accepts_view_languages" | "oauth2_token_url_not_set" | "oauth2_user_url_not_set" | "email_already_invited_or_member" | "price_not_found" | "invoice_not_from_organization" | "invoice_not_found" | "plan_not_found" | "plan_not_available_any_more" | "no_auto_translation_method" | "cannot_translate_base_language" | "pat_not_found" | "invalid_pat" | "pat_expired" | "operation_unavailable_for_account_type" | "validation_email_is_not_valid" | "current_password_required" | "cannot_create_organization" | "wrong_current_password" | "wrong_param_type" | "user_missing_password" | "expired_super_jwt_token" | "cannot_delete_your_own_account" | "cannot_sort_by_this_column" | "namespace_not_found" | "namespace_exists" | "invalid_authentication_method" | "unknown_sort_property" | "only_review_permission_accepts_state_change_languages" | "only_translate_or_review_permission_accepts_translate_languages" | "cannot_set_language_permissions_for_admin_scope" | "cannot_set_view_languages_without_translations_view_scope" | "cannot_set_translate_languages_without_translations_edit_scope" | "cannot_set_state_change_languages_without_translations_state_edit_scope" | "language_not_permitted" | "scopes_has_to_be_set" | "set_exactly_one_of_scopes_or_type" | "translation_exists" | "import_keys_error" | "provide_only_one_of_screenshots_and_screenshot_uploaded_image_ids" | "multiple_projects_not_supported" | "plan_translation_limit_exceeded" | "feature_not_enabled" | "license_key_not_found" | "cannot_set_view_languages_without_for_level_based_permissions" | "cannot_set_different_translate_and_state_change_languages_for_level_based_permissions" | "cannot_disable_your_own_account" | "user_account_disabled" | "subscription_not_found" | "invoice_does_not_have_usage" | "customer_not_found" | "subscription_not_active" | "organization_already_subscribed" | "organization_not_subscribed" | "license_key_used_by_another_instance" | "translation_spending_limit_exceeded" | "credit_spending_limit_exceeded" | "seats_spending_limit_exceeded" | "this_instance_is_already_licensed" | "big_meta_not_from_project" | "mt_service_not_enabled" | "project_not_selected" | "organization_not_selected" | "plan_has_subscribers" | "translation_failed" | "batch_job_not_found" | "no_translations_to_recheck" | "key_exists_in_namespace" | "tag_is_blank" | "execution_failed_on_management_error" | "translation_api_rate_limit" | "cannot_finalize_activity" | "formality_not_supported_by_service" | "language_not_supported_by_service" | "rate_limited" | "pat_access_not_allowed" | "pak_access_not_allowed" | "cannot_modify_disabled_translation" | "azure_config_required" | "s3_config_required" | "content_storage_config_required" | "content_storage_test_failed" | "content_storage_config_invalid" | "invalid_connection_string" | "cannot_create_azure_storage_client" | "s3_access_key_required" | "azure_connection_string_required" | "s3_secret_key_required" | "cannot_store_file_to_content_storage" | "unexpected_error_while_publishing_to_content_storage" | "webhook_responded_with_non_200_status" | "unexpected_error_while_executing_webhook" | "content_storage_is_in_use" | "cannot_set_state_for_missing_translation" | "no_project_id_provided" | "license_key_not_provided" | "subscription_already_canceled" | "user_is_subscribed_to_paid_plan" | "cannot_create_free_plan_without_fixed_type" | "cannot_modify_plan_free_status" | "key_id_not_provided" | "free_self_hosted_seat_limit_exceeded" | "advanced_params_not_supported" | "plural_forms_not_found_for_language" | "nested_plurals_not_supported" | "message_is_not_plural" | "content_outside_plural_forms" | "invalid_plural_form" | "multiple_plurals_not_supported" | "custom_values_json_too_long" | "unsupported_po_message_format" | "plural_forms_data_loss" | "current_user_does_not_own_image" | "user_cannot_view_this_organization" | "user_is_not_owner_of_organization" | "user_is_not_owner_or_maintainer_of_organization" | "pak_created_for_different_project" | "custom_slug_is_only_applicable_for_custom_storage" | "invalid_slug_format" | "batch_job_cancellation_timeout" | "import_failed" | "cannot_add_more_then_1000_languages" | "no_data_to_import" | "multiple_namespaces_mapped_to_single_file" | "multiple_mappings_for_same_file_language_name" | "multiple_mappings_for_null_file_language_name" | "too_many_mappings_for_file" | "missing_placeholder_in_template" | "tag_not_found" | "cannot_parse_encrypted_slack_login_data" | "slack_workspace_not_found" | "cannot_fetch_user_details_from_slack" | "slack_missing_scope" | "slack_not_connected_to_your_account" | "slack_invalid_command" | "slack_not_subscribed_yet" | "slack_connection_failed" | "tolgee_account_already_connected" | "slack_not_configured" | "slack_workspace_already_connected" | "slack_connection_error" | "email_verification_code_not_valid" | "cannot_subscribe_to_free_plan" | "plan_auto_assignment_only_for_free_plans" | "plan_auto_assignment_only_for_private_plans" | "task_not_found" | "task_not_finished" | "task_not_open" | "translation_agency_not_found" | "this_feature_is_not_implemented_in_oss" | "sso_token_exchange_failed" | "sso_user_info_retrieval_failed" | "sso_id_token_expired" | "sso_user_cannot_create_organization" | "sso_cant_verify_user" | "sso_auth_missing_domain" | "sso_domain_not_found_or_disabled" | "authentication_method_disabled" | "native_authentication_disabled" | "invitation_organization_mismatch" | "user_is_managed_by_organization" | "cannot_set_sso_provider_missing_fields" | "namespaces_cannot_be_disabled_when_namespace_exists" | "namespace_cannot_be_used_when_feature_is_disabled" | "sso_domain_not_allowed" | "sso_login_forced_for_this_account" | "use_sso_for_authentication_instead" | "date_has_to_be_in_the_future" | "custom_plan_and_plan_id_cannot_be_set_together" | "specify_plan_id_or_custom_plan" | "custom_plans_has_to_be_private" | "cannot_create_free_plan_with_prices" | "subscription_not_scheduled_for_cancellation" | "cannot_cancel_trial" | "cannot_update_without_modification" | "current_subscription_is_not_trialing" | "sorting_and_paging_is_not_supported_when_using_cursor" | "strings_metric_are_not_supported" | "plan_key_limit_exceeded" | "keys_spending_limit_exceeded" | "plan_seat_limit_exceeded" | "instance_not_using_license_key" | "invalid_path" | "llm_provider_not_found" | "llm_provider_error" | "prompt_not_found" | "llm_provider_not_returned_json" | "llm_template_parsing_error" | "llm_rate_limited" | "llm_provider_timeout" | "no_llm_provider_configured" | "glossary_not_found" | "glossary_term_not_found" | "glossary_term_translation_not_found" | "glossary_non_translatable_term_cannot_be_translated" | "translation_memory_name_already_exists" | "translation_memory_not_found" | "translation_memory_project_assignment_not_found" | "cannot_unassign_project_from_own_translation_memory" | "cannot_modify_project_translation_memory" | "translation_memory_already_assigned_to_project" | "translation_memory_duplicate_project_assignment" | "translation_memory_base_language_mismatch" | "cannot_change_tm_base_language_while_assigned" | "cannot_change_project_base_language_tm_conflict" | "project_translation_memory_not_found" | "translation_memory_entry_not_found" | "translation_memory_entry_read_only" | "translation_memory_entry_duplicate_target_language" | "translation_memory_import_empty" | "llm_content_filter" | "llm_provider_empty_response" | "llm_provider_max_tokens_exceeded" | "label_not_found" | "label_not_from_project" | "label_already_exists" | "filter_by_value_label_not_valid" | "suggestion_not_found" | "user_can_only_delete_his_suggestions" | "cannot_modify_reviewed_translation" | "cannot_modify_keys" | "expect_no_conflict_failed" | "suggestion_cant_be_plural" | "suggestion_must_be_plural" | "duplicate_suggestion" | "unsupported_media_type" | "impersonation_of_admin_by_supporter_not_allowed" | "already_impersonating_user" | "operation_not_permitted_in_read_only_mode" | "file_processing_failed" | "multiple_items_in_chunk_failed" | "content_delivery_prune_failed" | "branch_not_found" | "cannot_delete_default_branch" | "cannot_delete_branch_with_children" | "branch_already_exists" | "origin_branch_not_found" | "branch_merge_not_found" | "branch_merge_change_not_found" | "branch_merge_revision_not_valid" | "branch_merge_conflicts_not_resolved" | "branch_merge_already_merged" | "feature_not_enabled_for_project" | "export_key_plural_suffix_collision" | "translation_exceeds_char_limit" | "url_not_valid" | "qa_checks_not_enabled" | "plan_migration_not_found" | "plan_has_migrations" | "source_and_target_plan_must_be_different" | "project_import_version_mismatch" | "project_import_missing_project_json" | "project_import_corrupt_archive" | "binary_asset_not_found" | "binary_asset_translation_not_found" | "binary_asset_name_exists" | "binary_asset_name_required" | "binary_asset_name_too_long" | "binary_asset_language_is_source" | "binary_asset_target_is_source_language" | "binary_asset_invalid_source_revision" | "binary_asset_storage_not_streaming" | "binary_asset_transcript_exists" | "binary_asset_transcript_not_found" | "binary_asset_transcript_text_or_key_required" | "binary_asset_not_transcribable" | "transcription_not_configured" | "transcription_file_too_large" | "transcription_empty_result" | "transcription_unauthorized" | "transcription_rate_limited" | "transcription_failed" | "binary_asset_version_not_found" | "binary_asset_tool_unknown" | "binary_asset_tts_no_transcript" | "binary_asset_tts_voice_id_required" | "file_empty" | "file_name_too_long" | "file_name_not_valid";
             params?: unknown[];
         };
         ExistenceEntityDescription: {
@@ -7639,7 +8186,7 @@ export interface components {
         HierarchyItem: {
             requires: components["schemas"]["HierarchyItem"][];
             /** @enum {string} */
-            scope: "translations.view" | "translations.edit" | "translations.suggest" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify";
+            scope: "translations.view" | "translations.edit" | "translations.suggest" | "translation-suggestions.manage" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify" | "organization-quotas.view";
         };
         IdentifyRequest: {
             anonymousUserId: string;
@@ -7834,6 +8381,7 @@ export interface components {
             announcement?: components["schemas"]["AnnouncementDto"];
             authInfo?: components["schemas"]["AuthInfoModel"];
             eeSubscription?: components["schemas"]["InitialDataEeSubscriptionModel"];
+            hasCommunityContributions: boolean;
             languageTag?: string;
             preferredOrganization?: components["schemas"]["PrivateOrganizationModel"];
             qaCheckCategories?: components["schemas"]["QaCheckCategoryModel"][];
@@ -8659,6 +9207,12 @@ export interface components {
             };
             page?: components["schemas"]["PageMetadata"];
         };
+        PagedModelBinaryAssetModel: {
+            _embedded?: {
+                binaryAssets?: components["schemas"]["BinaryAssetModel"][];
+            };
+            page?: components["schemas"]["PageMetadata"];
+        };
         PagedModelBranchMergeChangeModel: {
             _embedded?: {
                 branchMergeChanges?: components["schemas"]["BranchMergeChangeModel"][];
@@ -8692,6 +9246,12 @@ export interface components {
         PagedModelContentStorageModel: {
             _embedded?: {
                 contentStorages?: components["schemas"]["ContentStorageModel"][];
+            };
+            page?: components["schemas"]["PageMetadata"];
+        };
+        PagedModelContributorModel: {
+            _embedded?: {
+                contributors?: components["schemas"]["ContributorModel"][];
             };
             page?: components["schemas"]["PageMetadata"];
         };
@@ -8981,7 +9541,7 @@ export interface components {
              *       "TRANSLATIONS_VIEW"
              *     ]
              */
-            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify")[];
+            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "translation-suggestions.manage" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify" | "organization-quotas.view")[];
             /**
              * @description List of languages user can change state to. If null, changing state of all language values is permitted.
              * @example [
@@ -8998,6 +9558,14 @@ export interface components {
              *     ]
              */
             suggestLanguageIds?: number[];
+            /**
+             * @description List of languages user can manage suggestions for. If null, managing suggestions for all languages is permitted.
+             * @example [
+             *       200001,
+             *       200004
+             *     ]
+             */
+            suggestManageLanguageIds?: number[];
             /**
              * @description List of languages user can translate to. If null, all languages editing is permitted.
              * @example [
@@ -9040,7 +9608,7 @@ export interface components {
              *       "TRANSLATIONS_VIEW"
              *     ]
              */
-            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify")[];
+            scopes: ("translations.view" | "translations.edit" | "translations.suggest" | "translation-suggestions.manage" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify" | "organization-quotas.view")[];
             /**
              * @description List of languages user can change state to. If null, changing state of all language values is permitted.
              * @example [
@@ -9057,6 +9625,14 @@ export interface components {
              *     ]
              */
             suggestLanguageIds?: number[];
+            /**
+             * @description List of languages user can manage suggestions for. If null, managing suggestions for all languages is permitted.
+             * @example [
+             *       200001,
+             *       200004
+             *     ]
+             */
+            suggestManageLanguageIds?: number[];
             /**
              * @description List of languages user can translate to. If null, all languages editing is permitted.
              * @example [
@@ -9135,6 +9711,11 @@ export interface components {
             enabledFeatures: ("GRANULAR_PERMISSIONS" | "PRIORITIZED_FEATURE_REQUESTS" | "PREMIUM_SUPPORT" | "DEDICATED_SLACK_CHANNEL" | "ASSISTED_UPDATES" | "DEPLOYMENT_ASSISTANCE" | "BACKUP_CONFIGURATION" | "TEAM_TRAINING" | "ACCOUNT_MANAGER" | "STANDARD_SUPPORT" | "PROJECT_LEVEL_CONTENT_STORAGES" | "WEBHOOKS" | "MULTIPLE_CONTENT_DELIVERY_CONFIGS" | "AI_PROMPT_CUSTOMIZATION" | "SLACK_INTEGRATION" | "TASKS" | "SSO" | "ORDER_TRANSLATION" | "GLOSSARY" | "TRANSLATION_LABELS" | "BRANCHING" | "QA_CHECKS" | "TRANSLATION_MEMORY")[];
             /** Format: int64 */
             id: number;
+            /**
+             * @description Whether the user views the organization purely via public-project access
+             * @example false
+             */
+            limitedView: boolean;
             /** @example Beautiful organization */
             name: string;
             organizationModel?: components["schemas"]["OrganizationModel"];
@@ -9186,7 +9767,7 @@ export interface components {
             /** Format: int64 */
             timestamp: number;
             /** @enum {string} */
-            type: "UNKNOWN" | "SET_TRANSLATION_STATE" | "SET_TRANSLATIONS" | "DISMISS_AUTO_TRANSLATED_STATE" | "SET_OUTDATED_FLAG" | "TRANSLATION_COMMENT_ADD" | "TRANSLATION_COMMENT_DELETE" | "TRANSLATION_COMMENT_EDIT" | "TRANSLATION_COMMENT_SET_STATE" | "SCREENSHOT_DELETE" | "SCREENSHOT_ADD" | "KEY_TAGS_EDIT" | "KEY_NAME_EDIT" | "KEY_CHARACTER_LIMIT_EDIT" | "KEY_DELETE" | "KEY_SOFT_DELETE" | "KEY_RESTORE" | "KEY_HARD_DELETE" | "BATCH_KEY_RESTORE" | "BATCH_KEY_HARD_DELETE" | "CREATE_KEY" | "COMPLEX_EDIT" | "IMPORT" | "CREATE_LANGUAGE" | "EDIT_LANGUAGE" | "DELETE_LANGUAGE" | "HARD_DELETE_LANGUAGE" | "CREATE_PROJECT" | "EDIT_PROJECT" | "NAMESPACE_EDIT" | "BATCH_PRE_TRANSLATE_BY_TM" | "BATCH_MACHINE_TRANSLATE" | "AUTO_TRANSLATE" | "BATCH_CLEAR_TRANSLATIONS" | "BATCH_COPY_TRANSLATIONS" | "BATCH_SET_TRANSLATION_STATE" | "BATCH_TAG_KEYS" | "BATCH_UNTAG_KEYS" | "BATCH_SET_KEYS_NAMESPACE" | "BATCH_ASSIGN_TRANSLATION_LABEL" | "BATCH_UNASSIGN_TRANSLATION_LABEL" | "AUTOMATION" | "CONTENT_DELIVERY_CONFIG_CREATE" | "CONTENT_DELIVERY_CONFIG_UPDATE" | "CONTENT_DELIVERY_CONFIG_DELETE" | "CONTENT_STORAGE_CREATE" | "CONTENT_STORAGE_UPDATE" | "CONTENT_STORAGE_DELETE" | "WEBHOOK_CONFIG_CREATE" | "WEBHOOK_CONFIG_UPDATE" | "WEBHOOK_CONFIG_DELETE" | "COMPLEX_TAG_OPERATION" | "TASKS_CREATE" | "TASK_CREATE" | "TASK_UPDATE" | "TASK_KEYS_UPDATE" | "TASK_FINISH" | "TASK_CLOSE" | "TASK_REOPEN" | "TASK_KEY_UPDATE" | "ORDER_TRANSLATION" | "GLOSSARY_CREATE" | "GLOSSARY_UPDATE" | "GLOSSARY_DELETE" | "GLOSSARY_IMPORT" | "GLOSSARY_TERM_CREATE" | "GLOSSARY_TERM_UPDATE" | "GLOSSARY_TERM_DELETE" | "GLOSSARY_TERM_TRANSLATION_UPDATE" | "TRANSLATION_MEMORY_CREATE" | "TRANSLATION_MEMORY_UPDATE" | "TRANSLATION_MEMORY_DELETE" | "TRANSLATION_MEMORY_ASSIGN_PROJECT" | "TRANSLATION_MEMORY_UNASSIGN_PROJECT" | "TRANSLATION_MEMORY_UPDATE_PROJECT_CONFIG" | "TRANSLATION_MEMORY_ENTRY_CREATE" | "TRANSLATION_MEMORY_ENTRY_UPDATE" | "TRANSLATION_MEMORY_ENTRY_DELETE" | "TRANSLATION_MEMORY_IMPORT" | "TRANSLATION_MEMORY_COPY_FROM_PROJECT" | "TRANSLATION_LABELS_EDIT" | "TRANSLATION_LABEL_ASSIGN" | "TRANSLATION_LABEL_CREATE" | "TRANSLATION_LABEL_UPDATE" | "TRANSLATION_LABEL_DELETE" | "CREATE_SUGGESTION" | "DECLINE_SUGGESTION" | "ACCEPT_SUGGESTION" | "REVERSE_SUGGESTION" | "DELETE_SUGGESTION" | "SUGGESTION_SET_ACTIVE" | "AI_PROMPT_CREATE" | "AI_PROMPT_UPDATE" | "AI_PROMPT_DELETE" | "BRANCH_CREATE" | "BRANCH_RENAME" | "BRANCH_DELETE" | "BRANCH_PROTECTION_CHANGE" | "BRANCH_MERGE" | "QA_ISSUE_IGNORE" | "QA_ISSUE_UNIGNORE";
+            type: "UNKNOWN" | "SET_TRANSLATION_STATE" | "SET_TRANSLATIONS" | "DISMISS_AUTO_TRANSLATED_STATE" | "SET_OUTDATED_FLAG" | "TRANSLATION_COMMENT_ADD" | "TRANSLATION_COMMENT_DELETE" | "TRANSLATION_COMMENT_EDIT" | "TRANSLATION_COMMENT_SET_STATE" | "SCREENSHOT_DELETE" | "SCREENSHOT_ADD" | "BINARY_ASSET_CREATE" | "BINARY_ASSET_UPDATE" | "BINARY_ASSET_DELETE" | "BINARY_ASSET_SOURCE_REPLACE" | "BINARY_ASSET_TRANSLATION_UPSERT" | "BINARY_ASSET_TRANSLATION_DELETE" | "BINARY_ASSET_TRANSLATION_REVIEW" | "BINARY_ASSET_TRANSCRIPT_LINK" | "BINARY_ASSET_TRANSCRIPT_UNLINK" | "BINARY_ASSET_TRANSCRIPT_GENERATE" | "BINARY_ASSET_TRANSLATION_VERSION_RUN" | "BINARY_ASSET_TRANSLATION_VERSION_CHOOSE" | "BINARY_ASSET_TRANSLATION_VERSION_DELETE" | "KEY_TAGS_EDIT" | "KEY_NAME_EDIT" | "KEY_CHARACTER_LIMIT_EDIT" | "KEY_DELETE" | "KEY_SOFT_DELETE" | "KEY_RESTORE" | "KEY_HARD_DELETE" | "BATCH_KEY_RESTORE" | "BATCH_KEY_HARD_DELETE" | "CREATE_KEY" | "COMPLEX_EDIT" | "IMPORT" | "CREATE_LANGUAGE" | "EDIT_LANGUAGE" | "DELETE_LANGUAGE" | "HARD_DELETE_LANGUAGE" | "CREATE_PROJECT" | "EDIT_PROJECT" | "NAMESPACE_EDIT" | "BATCH_PRE_TRANSLATE_BY_TM" | "BATCH_MACHINE_TRANSLATE" | "AUTO_TRANSLATE" | "BATCH_CLEAR_TRANSLATIONS" | "BATCH_COPY_TRANSLATIONS" | "BATCH_SET_TRANSLATION_STATE" | "BATCH_TAG_KEYS" | "BATCH_UNTAG_KEYS" | "BATCH_SET_KEYS_NAMESPACE" | "BATCH_ASSIGN_TRANSLATION_LABEL" | "BATCH_UNASSIGN_TRANSLATION_LABEL" | "AUTOMATION" | "CONTENT_DELIVERY_CONFIG_CREATE" | "CONTENT_DELIVERY_CONFIG_UPDATE" | "CONTENT_DELIVERY_CONFIG_DELETE" | "CONTENT_STORAGE_CREATE" | "CONTENT_STORAGE_UPDATE" | "CONTENT_STORAGE_DELETE" | "WEBHOOK_CONFIG_CREATE" | "WEBHOOK_CONFIG_UPDATE" | "WEBHOOK_CONFIG_DELETE" | "COMPLEX_TAG_OPERATION" | "TASKS_CREATE" | "TASK_CREATE" | "TASK_UPDATE" | "TASK_KEYS_UPDATE" | "TASK_FINISH" | "TASK_CLOSE" | "TASK_REOPEN" | "TASK_KEY_UPDATE" | "ORDER_TRANSLATION" | "GLOSSARY_CREATE" | "GLOSSARY_UPDATE" | "GLOSSARY_DELETE" | "GLOSSARY_IMPORT" | "GLOSSARY_TERM_CREATE" | "GLOSSARY_TERM_UPDATE" | "GLOSSARY_TERM_DELETE" | "GLOSSARY_TERM_TRANSLATION_UPDATE" | "TRANSLATION_MEMORY_CREATE" | "TRANSLATION_MEMORY_UPDATE" | "TRANSLATION_MEMORY_DELETE" | "TRANSLATION_MEMORY_ASSIGN_PROJECT" | "TRANSLATION_MEMORY_UNASSIGN_PROJECT" | "TRANSLATION_MEMORY_UPDATE_PROJECT_CONFIG" | "TRANSLATION_MEMORY_ENTRY_CREATE" | "TRANSLATION_MEMORY_ENTRY_UPDATE" | "TRANSLATION_MEMORY_ENTRY_DELETE" | "TRANSLATION_MEMORY_IMPORT" | "TRANSLATION_MEMORY_COPY_FROM_PROJECT" | "TRANSLATION_LABELS_EDIT" | "TRANSLATION_LABEL_ASSIGN" | "TRANSLATION_LABEL_CREATE" | "TRANSLATION_LABEL_UPDATE" | "TRANSLATION_LABEL_DELETE" | "CREATE_SUGGESTION" | "DECLINE_SUGGESTION" | "ACCEPT_SUGGESTION" | "REVERSE_SUGGESTION" | "DELETE_SUGGESTION" | "SUGGESTION_SET_ACTIVE" | "AI_PROMPT_CREATE" | "AI_PROMPT_UPDATE" | "AI_PROMPT_DELETE" | "BRANCH_CREATE" | "BRANCH_RENAME" | "BRANCH_DELETE" | "BRANCH_PROTECTION_CHANGE" | "BRANCH_MERGE" | "QA_ISSUE_IGNORE" | "QA_ISSUE_UNIGNORE";
         };
         ProjectAiPromptCustomizationModel: {
             /**
@@ -9260,6 +9841,8 @@ export interface components {
             stateChangeLanguages?: number[];
             /** @description Languages user can suggest translation */
             suggestLanguages?: number[];
+            /** @description Languages user can manage suggestions for */
+            suggestManageLanguages?: number[];
             /** @description Languages user can translate to */
             translateLanguages?: number[];
             /** @enum {string} */
@@ -9295,6 +9878,8 @@ export interface components {
             organizationOwner?: components["schemas"]["SimpleOrganizationModel"];
             /** @enum {string} */
             organizationRole?: "MEMBER" | "OWNER" | "MAINTAINER";
+            /** @description Whether the project is public — discoverable and open to community suggestions */
+            public: boolean;
             slug?: string;
             /**
              * @description Suggestions for translations
@@ -9312,6 +9897,8 @@ export interface components {
         };
         ProjectStatistics: {
             /** Format: int64 */
+            assetCount: number;
+            /** Format: int64 */
             keyCount: number;
             /** Format: int64 */
             languageCount: number;
@@ -9324,10 +9911,16 @@ export interface components {
             translationStatePercentages: {
                 [key: string]: number;
             };
+            /** Format: int64 */
+            untranslatedAssetCount: number;
         };
         ProjectStatsModel: {
             /** Format: int64 */
             baseWordsCount: number;
+            /** Format: int64 */
+            binaryAssetCount: number;
+            /** Format: int64 */
+            currentBinaryAssetTranslationCount: number;
             /** Format: int64 */
             keyCount: number;
             /** Format: int32 */
@@ -9335,6 +9928,10 @@ export interface components {
             languageStats: components["schemas"]["LanguageStatsModel"][];
             /** Format: int64 */
             membersCount: number;
+            /** Format: int64 */
+            missingBinaryAssetTranslationCount: number;
+            /** Format: int64 */
+            outdatedBinaryAssetTranslationCount: number;
             /** Format: int64 */
             projectId: number;
             /** Format: double */
@@ -9392,6 +9989,8 @@ export interface components {
             organizationOwner?: components["schemas"]["SimpleOrganizationModel"];
             /** @enum {string} */
             organizationRole?: "MEMBER" | "OWNER" | "MAINTAINER";
+            /** @description Whether the project is public — discoverable and open to community suggestions */
+            public: boolean;
             slug?: string;
             stats: components["schemas"]["ProjectStatistics"];
         };
@@ -9799,6 +10398,14 @@ export interface components {
             /** Format: int64 */
             updatedAt: number;
         };
+        RunBinaryAssetToolRequest: {
+            /** Format: int64 */
+            baseVersionId?: number;
+            params?: {
+                [key: string]: unknown;
+            };
+            tool: string;
+        };
         S3ContentStorageConfigDto: {
             accessKey?: string;
             bucketName: string;
@@ -9866,12 +10473,21 @@ export interface components {
             prices: components["schemas"]["PlanPricesModel"];
             public: boolean;
         };
+        SetBinaryAssetVoiceRequest: {
+            /** Format: int64 */
+            languageId?: number;
+            voiceId?: string;
+        };
         SetBranchProtectedModel: {
             /**
              * @description Whether the branch is protected
              * @example true
              */
             isProtected: boolean;
+        };
+        SetChosenVersionRequest: {
+            /** Format: int64 */
+            versionId?: number;
         };
         SetDisabledLanguagesRequest: {
             languageIds: number[];
@@ -9909,6 +10525,10 @@ export interface components {
              * @example We are Dunder Mifflin, a paper company. We sell paper. This is an project of translations for out paper selling app.
              */
             description?: string;
+        };
+        SetProjectPublicRequest: {
+            /** @description Whether the project should be public (discoverable and open to community suggestions) */
+            public: boolean;
         };
         SetTranslationsResponseModel: {
             /**
@@ -10273,7 +10893,7 @@ export interface components {
         };
         StorageTestResult: {
             /** @enum {string} */
-            message?: "unauthenticated" | "api_access_forbidden" | "api_key_not_found" | "invalid_api_key" | "invalid_project_api_key" | "project_api_key_expired" | "bad_credentials" | "mfa_enabled" | "invalid_otp_code" | "mfa_not_enabled" | "can_not_revoke_own_permissions" | "data_corrupted" | "invitation_code_does_not_exist_or_expired" | "invitation_email_mismatch" | "language_tag_exists" | "language_name_exists" | "language_not_found" | "operation_not_permitted" | "registrations_not_allowed" | "project_not_found" | "resource_not_found" | "scope_not_found" | "key_exists" | "third_party_auth_error_message" | "third_party_auth_no_email" | "third_party_auth_non_matching_email" | "third_party_auth_no_sub" | "third_party_auth_unknown_error" | "email_already_verified" | "third_party_unauthorized" | "third_party_google_workspace_mismatch" | "third_party_switch_initiated" | "third_party_switch_conflict" | "username_already_exists" | "email_domain_not_allowed" | "username_or_password_invalid" | "user_already_has_permissions" | "user_already_has_role" | "user_not_found" | "file_not_image" | "file_too_big" | "invalid_timestamp" | "email_not_verified" | "missing_callback_url" | "invalid_jwt_token" | "expired_jwt_token" | "general_jwt_error" | "cannot_find_suitable_address_part" | "slug_not_unique" | "user_is_not_member_of_organization" | "organization_has_no_other_owner" | "user_has_no_project_access" | "user_is_organization_owner" | "cannot_set_your_own_permissions" | "user_is_organization_member" | "property_not_mutable" | "import_language_not_from_project" | "existing_language_not_selected" | "conflict_is_not_resolved" | "language_already_selected" | "cannot_parse_file" | "could_not_resolve_property" | "cannot_add_more_then_100_languages" | "no_languages_provided" | "language_with_base_language_tag_not_found" | "language_not_from_project" | "namespace_not_from_project" | "cannot_delete_base_language" | "key_not_from_project" | "max_screenshots_exceeded" | "translation_not_from_project" | "can_edit_only_own_comment" | "request_parse_error" | "request_validation_error" | "filter_by_value_state_not_valid" | "filter_by_value_qa_check_type_not_valid" | "import_has_expired" | "tag_not_from_project" | "translation_text_too_long" | "invalid_recaptcha_token" | "cannot_leave_owning_project" | "cannot_leave_project_with_organization_role" | "dont_have_direct_permissions" | "tag_too_log" | "too_many_uploaded_images" | "one_or_more_images_not_found" | "screenshot_not_of_key" | "service_not_found" | "too_many_requests" | "translation_not_found" | "out_of_credits" | "key_not_found" | "organization_not_found" | "cannot_find_base_language" | "base_language_not_found" | "no_exported_result" | "cannot_set_your_own_role" | "only_translate_review_or_view_permission_accepts_view_languages" | "oauth2_token_url_not_set" | "oauth2_user_url_not_set" | "email_already_invited_or_member" | "price_not_found" | "invoice_not_from_organization" | "invoice_not_found" | "plan_not_found" | "plan_not_available_any_more" | "no_auto_translation_method" | "cannot_translate_base_language" | "pat_not_found" | "invalid_pat" | "pat_expired" | "operation_unavailable_for_account_type" | "validation_email_is_not_valid" | "current_password_required" | "cannot_create_organization" | "wrong_current_password" | "wrong_param_type" | "user_missing_password" | "expired_super_jwt_token" | "cannot_delete_your_own_account" | "cannot_sort_by_this_column" | "namespace_not_found" | "namespace_exists" | "invalid_authentication_method" | "unknown_sort_property" | "only_review_permission_accepts_state_change_languages" | "only_translate_or_review_permission_accepts_translate_languages" | "cannot_set_language_permissions_for_admin_scope" | "cannot_set_view_languages_without_translations_view_scope" | "cannot_set_translate_languages_without_translations_edit_scope" | "cannot_set_state_change_languages_without_translations_state_edit_scope" | "language_not_permitted" | "scopes_has_to_be_set" | "set_exactly_one_of_scopes_or_type" | "translation_exists" | "import_keys_error" | "provide_only_one_of_screenshots_and_screenshot_uploaded_image_ids" | "multiple_projects_not_supported" | "plan_translation_limit_exceeded" | "feature_not_enabled" | "license_key_not_found" | "cannot_set_view_languages_without_for_level_based_permissions" | "cannot_set_different_translate_and_state_change_languages_for_level_based_permissions" | "cannot_disable_your_own_account" | "user_account_disabled" | "subscription_not_found" | "invoice_does_not_have_usage" | "customer_not_found" | "subscription_not_active" | "organization_already_subscribed" | "organization_not_subscribed" | "license_key_used_by_another_instance" | "translation_spending_limit_exceeded" | "credit_spending_limit_exceeded" | "seats_spending_limit_exceeded" | "this_instance_is_already_licensed" | "big_meta_not_from_project" | "mt_service_not_enabled" | "project_not_selected" | "organization_not_selected" | "plan_has_subscribers" | "translation_failed" | "batch_job_not_found" | "no_translations_to_recheck" | "key_exists_in_namespace" | "tag_is_blank" | "execution_failed_on_management_error" | "translation_api_rate_limit" | "cannot_finalize_activity" | "formality_not_supported_by_service" | "language_not_supported_by_service" | "rate_limited" | "pat_access_not_allowed" | "pak_access_not_allowed" | "cannot_modify_disabled_translation" | "azure_config_required" | "s3_config_required" | "content_storage_config_required" | "content_storage_test_failed" | "content_storage_config_invalid" | "invalid_connection_string" | "cannot_create_azure_storage_client" | "s3_access_key_required" | "azure_connection_string_required" | "s3_secret_key_required" | "cannot_store_file_to_content_storage" | "unexpected_error_while_publishing_to_content_storage" | "webhook_responded_with_non_200_status" | "unexpected_error_while_executing_webhook" | "content_storage_is_in_use" | "cannot_set_state_for_missing_translation" | "no_project_id_provided" | "license_key_not_provided" | "subscription_already_canceled" | "user_is_subscribed_to_paid_plan" | "cannot_create_free_plan_without_fixed_type" | "cannot_modify_plan_free_status" | "key_id_not_provided" | "free_self_hosted_seat_limit_exceeded" | "advanced_params_not_supported" | "plural_forms_not_found_for_language" | "nested_plurals_not_supported" | "message_is_not_plural" | "content_outside_plural_forms" | "invalid_plural_form" | "multiple_plurals_not_supported" | "custom_values_json_too_long" | "unsupported_po_message_format" | "plural_forms_data_loss" | "current_user_does_not_own_image" | "user_cannot_view_this_organization" | "user_is_not_owner_of_organization" | "user_is_not_owner_or_maintainer_of_organization" | "pak_created_for_different_project" | "custom_slug_is_only_applicable_for_custom_storage" | "invalid_slug_format" | "batch_job_cancellation_timeout" | "import_failed" | "cannot_add_more_then_1000_languages" | "no_data_to_import" | "multiple_namespaces_mapped_to_single_file" | "multiple_mappings_for_same_file_language_name" | "multiple_mappings_for_null_file_language_name" | "too_many_mappings_for_file" | "missing_placeholder_in_template" | "tag_not_found" | "cannot_parse_encrypted_slack_login_data" | "slack_workspace_not_found" | "cannot_fetch_user_details_from_slack" | "slack_missing_scope" | "slack_not_connected_to_your_account" | "slack_invalid_command" | "slack_not_subscribed_yet" | "slack_connection_failed" | "tolgee_account_already_connected" | "slack_not_configured" | "slack_workspace_already_connected" | "slack_connection_error" | "email_verification_code_not_valid" | "cannot_subscribe_to_free_plan" | "plan_auto_assignment_only_for_free_plans" | "plan_auto_assignment_only_for_private_plans" | "task_not_found" | "task_not_finished" | "task_not_open" | "translation_agency_not_found" | "this_feature_is_not_implemented_in_oss" | "sso_token_exchange_failed" | "sso_user_info_retrieval_failed" | "sso_id_token_expired" | "sso_user_cannot_create_organization" | "sso_cant_verify_user" | "sso_auth_missing_domain" | "sso_domain_not_found_or_disabled" | "authentication_method_disabled" | "native_authentication_disabled" | "invitation_organization_mismatch" | "user_is_managed_by_organization" | "cannot_set_sso_provider_missing_fields" | "namespaces_cannot_be_disabled_when_namespace_exists" | "namespace_cannot_be_used_when_feature_is_disabled" | "sso_domain_not_allowed" | "sso_login_forced_for_this_account" | "use_sso_for_authentication_instead" | "date_has_to_be_in_the_future" | "custom_plan_and_plan_id_cannot_be_set_together" | "specify_plan_id_or_custom_plan" | "custom_plans_has_to_be_private" | "cannot_create_free_plan_with_prices" | "subscription_not_scheduled_for_cancellation" | "cannot_cancel_trial" | "cannot_update_without_modification" | "current_subscription_is_not_trialing" | "sorting_and_paging_is_not_supported_when_using_cursor" | "strings_metric_are_not_supported" | "plan_key_limit_exceeded" | "keys_spending_limit_exceeded" | "plan_seat_limit_exceeded" | "instance_not_using_license_key" | "invalid_path" | "llm_provider_not_found" | "llm_provider_error" | "prompt_not_found" | "llm_provider_not_returned_json" | "llm_template_parsing_error" | "llm_rate_limited" | "llm_provider_timeout" | "no_llm_provider_configured" | "glossary_not_found" | "glossary_term_not_found" | "glossary_term_translation_not_found" | "glossary_non_translatable_term_cannot_be_translated" | "translation_memory_name_already_exists" | "translation_memory_not_found" | "translation_memory_project_assignment_not_found" | "cannot_unassign_project_from_own_translation_memory" | "cannot_modify_project_translation_memory" | "translation_memory_already_assigned_to_project" | "translation_memory_duplicate_project_assignment" | "translation_memory_base_language_mismatch" | "cannot_change_tm_base_language_while_assigned" | "cannot_change_project_base_language_tm_conflict" | "project_translation_memory_not_found" | "translation_memory_entry_not_found" | "translation_memory_entry_read_only" | "translation_memory_entry_duplicate_target_language" | "translation_memory_import_empty" | "llm_content_filter" | "llm_provider_empty_response" | "label_not_found" | "label_not_from_project" | "label_already_exists" | "filter_by_value_label_not_valid" | "suggestion_not_found" | "user_can_only_delete_his_suggestions" | "cannot_modify_reviewed_translation" | "cannot_modify_keys" | "expect_no_conflict_failed" | "suggestion_cant_be_plural" | "suggestion_must_be_plural" | "duplicate_suggestion" | "unsupported_media_type" | "impersonation_of_admin_by_supporter_not_allowed" | "already_impersonating_user" | "operation_not_permitted_in_read_only_mode" | "file_processing_failed" | "multiple_items_in_chunk_failed" | "content_delivery_prune_failed" | "branch_not_found" | "cannot_delete_default_branch" | "cannot_delete_branch_with_children" | "branch_already_exists" | "origin_branch_not_found" | "branch_merge_not_found" | "branch_merge_change_not_found" | "branch_merge_revision_not_valid" | "branch_merge_conflicts_not_resolved" | "branch_merge_already_merged" | "feature_not_enabled_for_project" | "export_key_plural_suffix_collision" | "translation_exceeds_char_limit" | "url_not_valid" | "qa_checks_not_enabled" | "plan_migration_not_found" | "plan_has_migrations" | "source_and_target_plan_must_be_different";
+            message?: "unauthenticated" | "api_access_forbidden" | "api_key_not_found" | "invalid_api_key" | "invalid_project_api_key" | "project_api_key_expired" | "bad_credentials" | "mfa_enabled" | "invalid_otp_code" | "mfa_not_enabled" | "can_not_revoke_own_permissions" | "data_corrupted" | "invitation_code_does_not_exist_or_expired" | "invitation_email_mismatch" | "language_tag_exists" | "language_name_exists" | "language_not_found" | "operation_not_permitted" | "registrations_not_allowed" | "project_not_found" | "resource_not_found" | "scope_not_found" | "key_exists" | "third_party_auth_error_message" | "third_party_auth_no_email" | "third_party_auth_non_matching_email" | "third_party_auth_no_sub" | "third_party_auth_unknown_error" | "email_already_verified" | "third_party_unauthorized" | "third_party_google_workspace_mismatch" | "third_party_switch_initiated" | "third_party_switch_conflict" | "username_already_exists" | "email_domain_not_allowed" | "username_or_password_invalid" | "user_already_has_permissions" | "user_already_has_role" | "user_not_found" | "file_not_image" | "file_too_big" | "invalid_timestamp" | "email_not_verified" | "missing_callback_url" | "invalid_jwt_token" | "expired_jwt_token" | "general_jwt_error" | "cannot_find_suitable_address_part" | "slug_not_unique" | "user_is_not_member_of_organization" | "organization_has_no_other_owner" | "user_has_no_project_access" | "user_is_organization_owner" | "cannot_set_your_own_permissions" | "user_is_organization_member" | "property_not_mutable" | "import_language_not_from_project" | "existing_language_not_selected" | "conflict_is_not_resolved" | "language_already_selected" | "cannot_parse_file" | "could_not_resolve_property" | "cannot_add_more_then_100_languages" | "no_languages_provided" | "language_with_base_language_tag_not_found" | "language_not_from_project" | "namespace_not_from_project" | "cannot_delete_base_language" | "key_not_from_project" | "max_screenshots_exceeded" | "translation_not_from_project" | "can_edit_only_own_comment" | "request_parse_error" | "request_validation_error" | "filter_by_value_state_not_valid" | "filter_by_value_qa_check_type_not_valid" | "filter_pattern_not_valid" | "filter_pattern_language_not_valid" | "import_has_expired" | "tag_not_from_project" | "translation_text_too_long" | "invalid_recaptcha_token" | "cannot_leave_owning_project" | "cannot_leave_project_with_organization_role" | "dont_have_direct_permissions" | "tag_too_log" | "too_many_uploaded_images" | "one_or_more_images_not_found" | "screenshot_not_of_key" | "service_not_found" | "too_many_requests" | "translation_not_found" | "out_of_credits" | "key_not_found" | "organization_not_found" | "cannot_find_base_language" | "base_language_not_found" | "no_exported_result" | "cannot_set_your_own_role" | "only_translate_review_or_view_permission_accepts_view_languages" | "oauth2_token_url_not_set" | "oauth2_user_url_not_set" | "email_already_invited_or_member" | "price_not_found" | "invoice_not_from_organization" | "invoice_not_found" | "plan_not_found" | "plan_not_available_any_more" | "no_auto_translation_method" | "cannot_translate_base_language" | "pat_not_found" | "invalid_pat" | "pat_expired" | "operation_unavailable_for_account_type" | "validation_email_is_not_valid" | "current_password_required" | "cannot_create_organization" | "wrong_current_password" | "wrong_param_type" | "user_missing_password" | "expired_super_jwt_token" | "cannot_delete_your_own_account" | "cannot_sort_by_this_column" | "namespace_not_found" | "namespace_exists" | "invalid_authentication_method" | "unknown_sort_property" | "only_review_permission_accepts_state_change_languages" | "only_translate_or_review_permission_accepts_translate_languages" | "cannot_set_language_permissions_for_admin_scope" | "cannot_set_view_languages_without_translations_view_scope" | "cannot_set_translate_languages_without_translations_edit_scope" | "cannot_set_state_change_languages_without_translations_state_edit_scope" | "language_not_permitted" | "scopes_has_to_be_set" | "set_exactly_one_of_scopes_or_type" | "translation_exists" | "import_keys_error" | "provide_only_one_of_screenshots_and_screenshot_uploaded_image_ids" | "multiple_projects_not_supported" | "plan_translation_limit_exceeded" | "feature_not_enabled" | "license_key_not_found" | "cannot_set_view_languages_without_for_level_based_permissions" | "cannot_set_different_translate_and_state_change_languages_for_level_based_permissions" | "cannot_disable_your_own_account" | "user_account_disabled" | "subscription_not_found" | "invoice_does_not_have_usage" | "customer_not_found" | "subscription_not_active" | "organization_already_subscribed" | "organization_not_subscribed" | "license_key_used_by_another_instance" | "translation_spending_limit_exceeded" | "credit_spending_limit_exceeded" | "seats_spending_limit_exceeded" | "this_instance_is_already_licensed" | "big_meta_not_from_project" | "mt_service_not_enabled" | "project_not_selected" | "organization_not_selected" | "plan_has_subscribers" | "translation_failed" | "batch_job_not_found" | "no_translations_to_recheck" | "key_exists_in_namespace" | "tag_is_blank" | "execution_failed_on_management_error" | "translation_api_rate_limit" | "cannot_finalize_activity" | "formality_not_supported_by_service" | "language_not_supported_by_service" | "rate_limited" | "pat_access_not_allowed" | "pak_access_not_allowed" | "cannot_modify_disabled_translation" | "azure_config_required" | "s3_config_required" | "content_storage_config_required" | "content_storage_test_failed" | "content_storage_config_invalid" | "invalid_connection_string" | "cannot_create_azure_storage_client" | "s3_access_key_required" | "azure_connection_string_required" | "s3_secret_key_required" | "cannot_store_file_to_content_storage" | "unexpected_error_while_publishing_to_content_storage" | "webhook_responded_with_non_200_status" | "unexpected_error_while_executing_webhook" | "content_storage_is_in_use" | "cannot_set_state_for_missing_translation" | "no_project_id_provided" | "license_key_not_provided" | "subscription_already_canceled" | "user_is_subscribed_to_paid_plan" | "cannot_create_free_plan_without_fixed_type" | "cannot_modify_plan_free_status" | "key_id_not_provided" | "free_self_hosted_seat_limit_exceeded" | "advanced_params_not_supported" | "plural_forms_not_found_for_language" | "nested_plurals_not_supported" | "message_is_not_plural" | "content_outside_plural_forms" | "invalid_plural_form" | "multiple_plurals_not_supported" | "custom_values_json_too_long" | "unsupported_po_message_format" | "plural_forms_data_loss" | "current_user_does_not_own_image" | "user_cannot_view_this_organization" | "user_is_not_owner_of_organization" | "user_is_not_owner_or_maintainer_of_organization" | "pak_created_for_different_project" | "custom_slug_is_only_applicable_for_custom_storage" | "invalid_slug_format" | "batch_job_cancellation_timeout" | "import_failed" | "cannot_add_more_then_1000_languages" | "no_data_to_import" | "multiple_namespaces_mapped_to_single_file" | "multiple_mappings_for_same_file_language_name" | "multiple_mappings_for_null_file_language_name" | "too_many_mappings_for_file" | "missing_placeholder_in_template" | "tag_not_found" | "cannot_parse_encrypted_slack_login_data" | "slack_workspace_not_found" | "cannot_fetch_user_details_from_slack" | "slack_missing_scope" | "slack_not_connected_to_your_account" | "slack_invalid_command" | "slack_not_subscribed_yet" | "slack_connection_failed" | "tolgee_account_already_connected" | "slack_not_configured" | "slack_workspace_already_connected" | "slack_connection_error" | "email_verification_code_not_valid" | "cannot_subscribe_to_free_plan" | "plan_auto_assignment_only_for_free_plans" | "plan_auto_assignment_only_for_private_plans" | "task_not_found" | "task_not_finished" | "task_not_open" | "translation_agency_not_found" | "this_feature_is_not_implemented_in_oss" | "sso_token_exchange_failed" | "sso_user_info_retrieval_failed" | "sso_id_token_expired" | "sso_user_cannot_create_organization" | "sso_cant_verify_user" | "sso_auth_missing_domain" | "sso_domain_not_found_or_disabled" | "authentication_method_disabled" | "native_authentication_disabled" | "invitation_organization_mismatch" | "user_is_managed_by_organization" | "cannot_set_sso_provider_missing_fields" | "namespaces_cannot_be_disabled_when_namespace_exists" | "namespace_cannot_be_used_when_feature_is_disabled" | "sso_domain_not_allowed" | "sso_login_forced_for_this_account" | "use_sso_for_authentication_instead" | "date_has_to_be_in_the_future" | "custom_plan_and_plan_id_cannot_be_set_together" | "specify_plan_id_or_custom_plan" | "custom_plans_has_to_be_private" | "cannot_create_free_plan_with_prices" | "subscription_not_scheduled_for_cancellation" | "cannot_cancel_trial" | "cannot_update_without_modification" | "current_subscription_is_not_trialing" | "sorting_and_paging_is_not_supported_when_using_cursor" | "strings_metric_are_not_supported" | "plan_key_limit_exceeded" | "keys_spending_limit_exceeded" | "plan_seat_limit_exceeded" | "instance_not_using_license_key" | "invalid_path" | "llm_provider_not_found" | "llm_provider_error" | "prompt_not_found" | "llm_provider_not_returned_json" | "llm_template_parsing_error" | "llm_rate_limited" | "llm_provider_timeout" | "no_llm_provider_configured" | "glossary_not_found" | "glossary_term_not_found" | "glossary_term_translation_not_found" | "glossary_non_translatable_term_cannot_be_translated" | "translation_memory_name_already_exists" | "translation_memory_not_found" | "translation_memory_project_assignment_not_found" | "cannot_unassign_project_from_own_translation_memory" | "cannot_modify_project_translation_memory" | "translation_memory_already_assigned_to_project" | "translation_memory_duplicate_project_assignment" | "translation_memory_base_language_mismatch" | "cannot_change_tm_base_language_while_assigned" | "cannot_change_project_base_language_tm_conflict" | "project_translation_memory_not_found" | "translation_memory_entry_not_found" | "translation_memory_entry_read_only" | "translation_memory_entry_duplicate_target_language" | "translation_memory_import_empty" | "llm_content_filter" | "llm_provider_empty_response" | "llm_provider_max_tokens_exceeded" | "label_not_found" | "label_not_from_project" | "label_already_exists" | "filter_by_value_label_not_valid" | "suggestion_not_found" | "user_can_only_delete_his_suggestions" | "cannot_modify_reviewed_translation" | "cannot_modify_keys" | "expect_no_conflict_failed" | "suggestion_cant_be_plural" | "suggestion_must_be_plural" | "duplicate_suggestion" | "unsupported_media_type" | "impersonation_of_admin_by_supporter_not_allowed" | "already_impersonating_user" | "operation_not_permitted_in_read_only_mode" | "file_processing_failed" | "multiple_items_in_chunk_failed" | "content_delivery_prune_failed" | "branch_not_found" | "cannot_delete_default_branch" | "cannot_delete_branch_with_children" | "branch_already_exists" | "origin_branch_not_found" | "branch_merge_not_found" | "branch_merge_change_not_found" | "branch_merge_revision_not_valid" | "branch_merge_conflicts_not_resolved" | "branch_merge_already_merged" | "feature_not_enabled_for_project" | "export_key_plural_suffix_collision" | "translation_exceeds_char_limit" | "url_not_valid" | "qa_checks_not_enabled" | "plan_migration_not_found" | "plan_has_migrations" | "source_and_target_plan_must_be_different" | "project_import_version_mismatch" | "project_import_missing_project_json" | "project_import_corrupt_archive" | "binary_asset_not_found" | "binary_asset_translation_not_found" | "binary_asset_name_exists" | "binary_asset_name_required" | "binary_asset_name_too_long" | "binary_asset_language_is_source" | "binary_asset_target_is_source_language" | "binary_asset_invalid_source_revision" | "binary_asset_storage_not_streaming" | "binary_asset_transcript_exists" | "binary_asset_transcript_not_found" | "binary_asset_transcript_text_or_key_required" | "binary_asset_not_transcribable" | "transcription_not_configured" | "transcription_file_too_large" | "transcription_empty_result" | "transcription_unauthorized" | "transcription_rate_limited" | "transcription_failed" | "binary_asset_version_not_found" | "binary_asset_tool_unknown" | "binary_asset_tts_no_transcript" | "binary_asset_tts_voice_id_required" | "file_empty" | "file_name_too_long" | "file_name_not_valid";
             params?: unknown[];
             success: boolean;
         };
@@ -11967,6 +12587,130 @@ export interface operations {
             };
         };
     };
+    exportProject: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StreamingResponseBody"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    importProject: {
+        parameters: {
+            query?: {
+                /** @description Bypass the schema-version check. Unsupported; intended only for cross-version admin recovery — the import may complete yet silently corrupt data. */
+                ignoreVersion?: boolean;
+            };
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
     getUsers: {
         parameters: {
             query?: {
@@ -12483,7 +13227,7 @@ export interface operations {
             };
         };
     };
-    create_19: {
+    create_20: {
         parameters: {
             query?: never;
             header?: never;
@@ -12714,7 +13458,7 @@ export interface operations {
             };
         };
     };
-    update_13: {
+    update_14: {
         parameters: {
             query?: never;
             header?: never;
@@ -12776,7 +13520,7 @@ export interface operations {
             };
         };
     };
-    delete_12: {
+    delete_13: {
         parameters: {
             query?: never;
             header?: never;
@@ -12894,7 +13638,7 @@ export interface operations {
             };
         };
     };
-    get_26: {
+    get_27: {
         parameters: {
             query?: never;
             header?: never;
@@ -13193,6 +13937,65 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    download: {
+        parameters: {
+            query: {
+                token: string;
+                inline?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StreamingResponseBody"];
+                };
             };
             /** @description Bad Request */
             400: {
@@ -13638,7 +14441,7 @@ export interface operations {
             };
         };
     };
-    delete_19: {
+    delete_21: {
         parameters: {
             query?: never;
             header?: never;
@@ -14171,7 +14974,7 @@ export interface operations {
             };
         };
     };
-    create_14: {
+    create_15: {
         parameters: {
             query?: never;
             header?: never;
@@ -14231,7 +15034,7 @@ export interface operations {
             };
         };
     };
-    get_17: {
+    get_18: {
         parameters: {
             query?: never;
             header?: never;
@@ -14289,7 +15092,7 @@ export interface operations {
             };
         };
     };
-    update_12: {
+    update_13: {
         parameters: {
             query?: never;
             header?: never;
@@ -14351,7 +15154,7 @@ export interface operations {
             };
         };
     };
-    delete_11: {
+    delete_12: {
         parameters: {
             query?: never;
             header?: never;
@@ -14919,7 +15722,7 @@ export interface operations {
             };
         };
     };
-    create_17: {
+    create_18: {
         parameters: {
             query?: never;
             header?: never;
@@ -15047,7 +15850,7 @@ export interface operations {
             };
         };
     };
-    get_15: {
+    get_16: {
         parameters: {
             query?: never;
             header?: never;
@@ -15106,7 +15909,7 @@ export interface operations {
             };
         };
     };
-    update_10: {
+    update_11: {
         parameters: {
             query?: never;
             header?: never;
@@ -15169,7 +15972,7 @@ export interface operations {
             };
         };
     };
-    delete_9: {
+    delete_10: {
         parameters: {
             query?: never;
             header?: never;
@@ -15539,7 +16342,7 @@ export interface operations {
             };
         };
     };
-    create_18: {
+    create_19: {
         parameters: {
             query?: never;
             header?: never;
@@ -15663,7 +16466,7 @@ export interface operations {
             };
         };
     };
-    get_16: {
+    get_17: {
         parameters: {
             query?: never;
             header?: never;
@@ -15723,7 +16526,7 @@ export interface operations {
             };
         };
     };
-    update_11: {
+    update_12: {
         parameters: {
             query?: never;
             header?: never;
@@ -15787,7 +16590,7 @@ export interface operations {
             };
         };
     };
-    delete_10: {
+    delete_11: {
         parameters: {
             query?: never;
             header?: never;
@@ -15845,7 +16648,7 @@ export interface operations {
             };
         };
     };
-    update_14: {
+    update_15: {
         parameters: {
             query?: never;
             header?: never;
@@ -15909,7 +16712,7 @@ export interface operations {
             };
         };
     };
-    get_25: {
+    get_26: {
         parameters: {
             query?: never;
             header?: never;
@@ -17246,7 +18049,7 @@ export interface operations {
             };
         };
     };
-    create_15: {
+    create_16: {
         parameters: {
             query?: never;
             header?: never;
@@ -17435,7 +18238,7 @@ export interface operations {
             };
         };
     };
-    get_13: {
+    get_14: {
         parameters: {
             query?: never;
             header?: never;
@@ -17494,7 +18297,7 @@ export interface operations {
             };
         };
     };
-    update_8: {
+    update_9: {
         parameters: {
             query?: never;
             header?: never;
@@ -17557,7 +18360,7 @@ export interface operations {
             };
         };
     };
-    delete_7: {
+    delete_8: {
         parameters: {
             query?: never;
             header?: never;
@@ -17673,7 +18476,7 @@ export interface operations {
             };
         };
     };
-    list_3: {
+    list_5: {
         parameters: {
             query?: {
                 search?: string;
@@ -17741,7 +18544,7 @@ export interface operations {
             };
         };
     };
-    create_16: {
+    create_17: {
         parameters: {
             query?: never;
             header?: never;
@@ -17989,7 +18792,7 @@ export interface operations {
             };
         };
     };
-    get_14: {
+    get_15: {
         parameters: {
             query?: never;
             header?: never;
@@ -18049,7 +18852,7 @@ export interface operations {
             };
         };
     };
-    update_9: {
+    update_10: {
         parameters: {
             query?: never;
             header?: never;
@@ -18113,7 +18916,7 @@ export interface operations {
             };
         };
     };
-    delete_8: {
+    delete_9: {
         parameters: {
             query?: never;
             header?: never;
@@ -18593,7 +19396,7 @@ export interface operations {
             };
         };
     };
-    get_24: {
+    get_25: {
         parameters: {
             query?: never;
             header?: never;
@@ -18852,7 +19655,7 @@ export interface operations {
             };
         };
     };
-    create_13: {
+    create_14: {
         parameters: {
             query?: never;
             header?: never;
@@ -18968,7 +19771,7 @@ export interface operations {
             };
         };
     };
-    get_12: {
+    get_13: {
         parameters: {
             query?: never;
             header?: never;
@@ -19026,7 +19829,7 @@ export interface operations {
             };
         };
     };
-    update_7: {
+    update_8: {
         parameters: {
             query?: never;
             header?: never;
@@ -19088,7 +19891,7 @@ export interface operations {
             };
         };
     };
-    delete_6: {
+    delete_7: {
         parameters: {
             query?: never;
             header?: never;
@@ -20431,7 +21234,7 @@ export interface operations {
             };
         };
     };
-    list_4: {
+    list_6: {
         parameters: {
             query?: {
                 /** @description Zero-based page index (0..N) */
@@ -20496,7 +21299,7 @@ export interface operations {
             };
         };
     };
-    get_22: {
+    get_23: {
         parameters: {
             query?: never;
             header?: never;
@@ -20633,6 +21436,1431 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetVoiceModel"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    set: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetBinaryAssetVoiceRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetVoiceModel"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    list_4: {
+        parameters: {
+            query?: {
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+                search?: string;
+                filterMediaType?: string[];
+            };
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedModelBinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    create_13: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    name: string;
+                    description?: string;
+                    sourceLanguageId?: string;
+                    /** Format: binary */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    get_12: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    update_7: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BinaryAssetUpdateRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    delete_6: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    replaceSource: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    sourceDownloadTicket: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetDownloadTicketModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    addTranscript: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BinaryAssetTranscriptRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    deleteTranscript: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    generateTranscript: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    generateTranslationTranscript: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    upsertTranslation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    file: string;
+                    translatedAgainstSourceRevision: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    deleteTranslation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    translationDownloadTicket: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetDownloadTicketModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    setTranslationReviewed: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BinaryAssetReviewRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    listBinaryAssetTranslationVersions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetTranslationVersionModel"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    uploadVersion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["BinaryAssetTranslationVersionModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    setChosen: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetChosenVersionRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    runTool: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RunBinaryAssetToolRequest"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["BinaryAssetTranslationVersionModel"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    delete_20: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                versionId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    downloadTicket: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assetId: number;
+                languageId: number;
+                versionId: number;
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BinaryAssetDownloadTicketModel"];
+                };
             };
             /** @description Bad Request */
             400: {
@@ -21601,7 +23829,7 @@ export interface operations {
             };
         };
     };
-    delete_15: {
+    delete_16: {
         parameters: {
             query?: never;
             header?: never;
@@ -21721,7 +23949,7 @@ export interface operations {
             };
         };
     };
-    list_2: {
+    list_3: {
         parameters: {
             query?: {
                 /** @description Zero-based page index (0..N) */
@@ -22084,7 +24312,7 @@ export interface operations {
             };
         };
     };
-    list_1: {
+    list_2: {
         parameters: {
             query?: {
                 /** @description Zero-based page index (0..N) */
@@ -22475,6 +24703,71 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StorageTestResult"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    getContributors: {
+        parameters: {
+            query?: {
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedModelContributorModel"];
                 };
             };
             /** @description Bad Request */
@@ -24294,7 +26587,7 @@ export interface operations {
             };
         };
     };
-    delete_13: {
+    delete_14: {
         parameters: {
             query?: never;
             header?: never;
@@ -24736,6 +27029,97 @@ export interface operations {
                  *     To filter default namespace, set to empty string.
                  *        */
                 filterNoNamespace?: string[];
+                /** @description Selects only keys with name matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterKeyPattern?: string[];
+                /** @description Selects only keys with name not matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoKeyPattern?: string[];
+                /** @description Selects only keys with description matching the provided pattern.
+                 *     Keys without a description never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterDescriptionPattern?: string[];
+                /** @description Selects only keys with description not matching the provided pattern.
+                 *     Keys without a description always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoDescriptionPattern?: string[];
+                /** @description Selects only keys with namespace matching the provided pattern.
+                 *     Keys in the default namespace never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNamespacePattern?: string[];
+                /** @description Selects only keys with namespace not matching the provided pattern.
+                 *     Keys in the default namespace always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoNamespacePattern?: string[];
+                /** @description Selects only keys with a translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match any of the returned languages.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterTranslationPattern?: string[];
+                /** @description Selects only keys with no translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match against any of the returned
+                 *     languages. Keys with no translation in the specified language always match.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoTranslationPattern?: string[];
                 /** @description Selects only keys with provided tag */
                 filterTag?: string[];
                 /** @description Selects only keys without provided tag */
@@ -24846,7 +27230,7 @@ export interface operations {
             };
         };
     };
-    list_8: {
+    list_10: {
         parameters: {
             query?: {
                 /** @description Zero-based page index (0..N) */
@@ -24912,6 +27296,97 @@ export interface operations {
                  *     To filter default namespace, set to empty string.
                  *        */
                 filterNoNamespace?: string[];
+                /** @description Selects only keys with name matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterKeyPattern?: string[];
+                /** @description Selects only keys with name not matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoKeyPattern?: string[];
+                /** @description Selects only keys with description matching the provided pattern.
+                 *     Keys without a description never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterDescriptionPattern?: string[];
+                /** @description Selects only keys with description not matching the provided pattern.
+                 *     Keys without a description always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoDescriptionPattern?: string[];
+                /** @description Selects only keys with namespace matching the provided pattern.
+                 *     Keys in the default namespace never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNamespacePattern?: string[];
+                /** @description Selects only keys with namespace not matching the provided pattern.
+                 *     Keys in the default namespace always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoNamespacePattern?: string[];
+                /** @description Selects only keys with a translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match any of the returned languages.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterTranslationPattern?: string[];
+                /** @description Selects only keys with no translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match against any of the returned
+                 *     languages. Keys with no translation in the specified language always match.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoTranslationPattern?: string[];
                 /** @description Selects only keys with provided tag */
                 filterTag?: string[];
                 /** @description Selects only keys without provided tag */
@@ -25142,6 +27617,97 @@ export interface operations {
                  *     To filter default namespace, set to empty string.
                  *        */
                 filterNoNamespace?: string[];
+                /** @description Selects only keys with name matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterKeyPattern?: string[];
+                /** @description Selects only keys with name not matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoKeyPattern?: string[];
+                /** @description Selects only keys with description matching the provided pattern.
+                 *     Keys without a description never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterDescriptionPattern?: string[];
+                /** @description Selects only keys with description not matching the provided pattern.
+                 *     Keys without a description always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoDescriptionPattern?: string[];
+                /** @description Selects only keys with namespace matching the provided pattern.
+                 *     Keys in the default namespace never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNamespacePattern?: string[];
+                /** @description Selects only keys with namespace not matching the provided pattern.
+                 *     Keys in the default namespace always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoNamespacePattern?: string[];
+                /** @description Selects only keys with a translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match any of the returned languages.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterTranslationPattern?: string[];
+                /** @description Selects only keys with no translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match against any of the returned
+                 *     languages. Keys with no translation in the specified language always match.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoTranslationPattern?: string[];
                 /** @description Selects only keys with provided tag */
                 filterTag?: string[];
                 /** @description Selects only keys without provided tag */
@@ -25368,7 +27934,7 @@ export interface operations {
             };
         };
     };
-    delete_17: {
+    delete_18: {
         parameters: {
             query?: never;
             header?: never;
@@ -28448,6 +31014,68 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    setProjectPublic: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                projectId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetProjectPublicRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectModel"];
+                };
             };
             /** @description Bad Request */
             400: {
@@ -31840,7 +34468,7 @@ export interface operations {
             };
         };
     };
-    list_6: {
+    list_8: {
         parameters: {
             query?: never;
             header?: never;
@@ -32205,6 +34833,97 @@ export interface operations {
                  *     To filter default namespace, set to empty string.
                  *        */
                 filterNoNamespace?: string[];
+                /** @description Selects only keys with name matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterKeyPattern?: string[];
+                /** @description Selects only keys with name not matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoKeyPattern?: string[];
+                /** @description Selects only keys with description matching the provided pattern.
+                 *     Keys without a description never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterDescriptionPattern?: string[];
+                /** @description Selects only keys with description not matching the provided pattern.
+                 *     Keys without a description always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoDescriptionPattern?: string[];
+                /** @description Selects only keys with namespace matching the provided pattern.
+                 *     Keys in the default namespace never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNamespacePattern?: string[];
+                /** @description Selects only keys with namespace not matching the provided pattern.
+                 *     Keys in the default namespace always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoNamespacePattern?: string[];
+                /** @description Selects only keys with a translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match any of the returned languages.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterTranslationPattern?: string[];
+                /** @description Selects only keys with no translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match against any of the returned
+                 *     languages. Keys with no translation in the specified language always match.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoTranslationPattern?: string[];
                 /** @description Selects only keys with provided tag */
                 filterTag?: string[];
                 /** @description Selects only keys without provided tag */
@@ -32629,6 +35348,97 @@ export interface operations {
                  *     To filter default namespace, set to empty string.
                  *        */
                 filterNoNamespace?: string[];
+                /** @description Selects only keys with name matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterKeyPattern?: string[];
+                /** @description Selects only keys with name not matching the provided pattern.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoKeyPattern?: string[];
+                /** @description Selects only keys with description matching the provided pattern.
+                 *     Keys without a description never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterDescriptionPattern?: string[];
+                /** @description Selects only keys with description not matching the provided pattern.
+                 *     Keys without a description always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoDescriptionPattern?: string[];
+                /** @description Selects only keys with namespace matching the provided pattern.
+                 *     Keys in the default namespace never match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNamespacePattern?: string[];
+                /** @description Selects only keys with namespace not matching the provided pattern.
+                 *     Keys in the default namespace always match.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoNamespacePattern?: string[];
+                /** @description Selects only keys with a translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match any of the returned languages.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterTranslationPattern?: string[];
+                /** @description Selects only keys with no translation text matching the provided pattern,
+                 *     in the format: languageTag,pattern. Use `*` as the language tag to match against any of the returned
+                 *     languages. Keys with no translation in the specified language always match.
+                 *     The language tag is matched case-insensitively and must be included in the returned languages,
+                 *     otherwise the request fails with 400.
+                 *
+                 *     Pattern syntax: `*` matches any sequence of characters
+                 *     (`cart*` = starts with, `*_title` = ends with). A pattern without `*` matches anywhere in the value.
+                 *     Matching is case-insensitive. `%` and `_` are matched literally.
+                 *     You can use this parameter multiple times; all patterns must match (logical AND).
+                 *     Limits: a pattern must not be empty, may be at most 500 characters long
+                 *     with at most 5 wildcards, and at most 20
+                 *     patterns may be provided per parameter; violations fail with 400. */
+                filterNoTranslationPattern?: string[];
                 /** @description Selects only keys with provided tag */
                 filterTag?: string[];
                 /** @description Selects only keys without provided tag */
@@ -34120,6 +36930,7 @@ export interface operations {
                 viewLanguages?: number[];
                 stateChangeLanguages?: number[];
                 suggestLanguages?: number[];
+                suggestManageLanguages?: number[];
             };
             header?: never;
             path: {
@@ -34183,6 +36994,7 @@ export interface operations {
                 viewLanguages?: number[];
                 stateChangeLanguages?: number[];
                 suggestLanguages?: number[];
+                suggestManageLanguages?: number[];
             };
             header?: never;
             path: {
@@ -34239,7 +37051,7 @@ export interface operations {
             };
         };
     };
-    list: {
+    list_1: {
         parameters: {
             query?: {
                 /** @description Zero-based page index (0..N) */
@@ -34720,7 +37532,7 @@ export interface operations {
             };
         };
     };
-    get_21: {
+    get_22: {
         parameters: {
             query?: never;
             header?: never;
@@ -34776,7 +37588,7 @@ export interface operations {
             };
         };
     };
-    get_20: {
+    get_21: {
         parameters: {
             query?: never;
             header?: never;
@@ -34832,7 +37644,7 @@ export interface operations {
             };
         };
     };
-    get_19: {
+    get_20: {
         parameters: {
             query?: never;
             header?: never;
@@ -34906,6 +37718,71 @@ export interface operations {
                     "application/json": {
                         [key: string]: components["schemas"]["MachineTranslationProviderModel"];
                     };
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string & (components["schemas"]["ErrorResponseTyped"] | components["schemas"]["ErrorResponseBody"]);
+                };
+            };
+        };
+    };
+    getAllPublicWithStatistics: {
+        parameters: {
+            query?: {
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+                search?: string;
+                filterContributed?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedModelProjectWithStatsModel"];
                 };
             };
             /** @description Bad Request */
@@ -35020,7 +37897,7 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        [key: string]: ("translations.view" | "translations.edit" | "translations.suggest" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify")[];
+                        [key: string]: ("translations.view" | "translations.edit" | "translations.suggest" | "translation-suggestions.manage" | "keys.edit" | "screenshots.upload" | "screenshots.delete" | "screenshots.view" | "activity.view" | "languages.edit" | "admin" | "project.edit" | "members.view" | "members.edit" | "translation-comments.add" | "translation-comments.edit" | "translation-comments.set-state" | "translations.state-edit" | "keys.view" | "keys.delete" | "keys.create" | "batch-jobs.view" | "batch-jobs.cancel" | "translations.batch-by-tm" | "translations.batch-machine" | "content-delivery.manage" | "content-delivery.publish" | "webhooks.manage" | "tasks.view" | "tasks.edit" | "prompts.view" | "prompts.edit" | "translation-labels.manage" | "translation-labels.assign" | "all.view" | "branch.management" | "branch.protected-modify" | "organization-quotas.view")[];
                     };
                 };
             };
@@ -36007,7 +38884,7 @@ export interface operations {
             };
         };
     };
-    get_18: {
+    get_19: {
         parameters: {
             query?: never;
             header?: never;

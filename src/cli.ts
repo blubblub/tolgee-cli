@@ -40,6 +40,7 @@ import SyncCommand from './commands/sync/sync.js';
 import TagCommand from './commands/tag.js';
 import BranchCommand from './commands/branch.js';
 import MergeCommand from './commands/merge.js';
+import AssetsCommand from './commands/assets.js';
 
 import { getSingleOption } from './utils/getSingleOption.js';
 import { mergeHeaders } from './utils/headers.js';
@@ -224,6 +225,9 @@ async function run() {
     );
     program.addCommand(
       MergeCommand(config).configureHelp({ showGlobalOptions: true })
+    );
+    program.addCommand(
+      AssetsCommand(config).configureHelp({ showGlobalOptions: true })
     );
 
     await program.parseAsync();
